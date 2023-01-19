@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://td2mr6vxa2ac"]
+
+[ext_resource type="Texture2D" uid="uid://ciisk1mu04l2f" path="res://assets/Textures/Ramp.png" id="1_b45uo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4ujsw"]
+points = PackedVector3Array(1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dt2s"]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.255482, 0.345103, 0.411985, 1)
+roughness = 0.4
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_an8bl"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2.00001),
+"format": 4097,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 1, 0, 5, 0, 2, 0, 1, 0, 4, 0, 5, 0, 4, 0, 3, 0, 5, 0, 1, 0, 3, 0, 4, 0, 1, 0, 0, 0, 3, 0, 5, 0, 0, 0, 2, 0, 5, 0, 3, 0, 0, 0),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 6,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_27kxe"]
+resource_name = "Ramp_Cube001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 128, 62, 0, 0, 0, 63, 244, 4, 181, 62, 135, 125, 37, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 62, 244, 4, 181, 62, 0, 0, 128, 63, 244, 4, 53, 63, 134, 125, 37, 63, 0, 0, 128, 62, 0, 0, 128, 51, 243, 4, 53, 63, 24, 246, 149, 62, 0, 0, 0, 0, 1, 0, 0, 63, 243, 4, 53, 63, 134, 125, 37, 63, 244, 4, 181, 62, 0, 0, 128, 63, 242, 4, 117, 63, 1, 0, 0, 63, 244, 4, 53, 63, 0, 0, 128, 63, 244, 4, 181, 62, 134, 125, 37, 63, 242, 4, 53, 63, 0, 0, 64, 63, 244, 4, 181, 62, 26, 246, 149, 62, 242, 4, 181, 62, 0, 0, 0, 63, 242, 4, 117, 63, 0, 0, 128, 63),
+"format": 4119,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 3, 0, 6, 0, 5, 0, 15, 0, 7, 0, 5, 0, 13, 0, 15, 0, 14, 0, 11, 0, 17, 0, 4, 0, 9, 0, 12, 0, 4, 0, 1, 0, 9, 0, 16, 0, 2, 0, 8, 0, 16, 0, 10, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_5dt2s"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 18,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 252, 247, 31, 255, 165, 157, 246, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 255, 1, 240, 31, 255, 255, 247, 223, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 255, 165, 157, 54, 255, 255, 247, 223, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 252, 247, 31, 255, 165, 157, 246, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 255, 1, 240, 31, 255, 255, 247, 223, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 255, 253, 7, 0, 0, 252, 247, 223, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 252, 247, 31, 255, 165, 157, 246, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 255, 253, 7, 0, 0, 252, 247, 223, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 255, 165, 157, 54, 255, 255, 247, 223, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 1, 240, 31, 255, 255, 247, 223, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 165, 157, 54, 255, 255, 247, 223, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 255, 247, 31, 255, 165, 157, 246, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 1, 240, 31, 255, 255, 247, 223, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 253, 7, 0, 0, 252, 247, 223, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 255, 247, 31, 255, 165, 157, 246, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 253, 7, 0, 0, 252, 247, 223, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 165, 157, 54, 255, 255, 247, 223, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 255, 247, 31, 255, 165, 157, 246)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_an8bl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8shdg"]
+albedo_texture = ExtResource("1_b45uo")
+
+[node name="Ramp" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_4ujsw")
+
+[node name="Cube" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("ArrayMesh_27kxe")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_8shdg")

@@ -1,0 +1,11 @@
+AudioStreamPlayer3D
+Camera3D
+StaticBody3D
+MarginContainer
+TextureRect
+CenterContainer
+MeshInstance3D
+CollisionShape3D
+Panel
+PanelContainer
+DirectionalLight3D

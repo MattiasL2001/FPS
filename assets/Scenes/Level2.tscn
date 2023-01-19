@@ -1,0 +1,119 @@
+[gd_scene load_steps=17 format=3 uid="uid://d0x0gk4ds48bo"]
+
+[ext_resource type="Script" path="res://assets/Scripts/AStar.gd" id="1_cjkqh"]
+[ext_resource type="Script" path="res://assets/Scripts/GameManager.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://dxasecjq6pvt4" path="res://assets/Scenes/Enemy.tscn" id="4_5kgvi"]
+[ext_resource type="PackedScene" uid="uid://cfkphne5uh1b3" path="res://assets/Scenes/Player.tscn" id="4_kuvdn"]
+[ext_resource type="Material" uid="uid://buf2k6mmcjxt4" path="res://assets/Materials/grid.material" id="4_rnpm1"]
+[ext_resource type="PackedScene" uid="uid://bo4y72mdb4o3w" path="res://assets/3D Models/container.tscn" id="7_67iym"]
+[ext_resource type="Script" path="res://assets/Scripts/LightBox.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://c8ixbs1gv6dv2" path="res://assets/3D Models/Laptop_3.tscn" id="13_i6q4q"]
+[ext_resource type="PackedScene" uid="uid://b8r477ubrqkfs" path="res://assets/3D Models/Hammer1.tscn" id="14_oeed6"]
+[ext_resource type="Environment" uid="uid://ddegkkayo3nvw" path="res://assets/environment.tres" id="20"]
+
+[sub_resource type="BoxShape3D" id="4"]
+
+[sub_resource type="BoxMesh" id="3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_10hib"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ehxmw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_770yt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0gnj8"]
+
+[node name="Level" type="Node3D"]
+
+[node name="AStar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+script = ExtResource("1_cjkqh")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+environment = ExtResource("20")
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("3")
+
+[node name="LevelDesign" type="Node" parent="."]
+
+[node name="LightBox" type="RigidBody3D" parent="LevelDesign" groups=["Interact"]]
+transform = Transform3D(0.67559, 0.737277, 0, -0.692814, 0.634847, 0.34202, 0.252164, -0.231065, 0.939693, 0, 20, 0)
+mass = 20.0
+script = ExtResource("8")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="LevelDesign/LightBox"]
+transform = Transform3D(1, 1.86265e-08, 0, -2.98023e-08, 1, 0, 1.49012e-08, 0, 1, 0, 0, 0)
+shape = SubResource("4")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="LevelDesign/LightBox/CollisionShape"]
+mesh = SubResource("3")
+
+[node name="Ground" type="StaticBody3D" parent="LevelDesign" groups=["pathable", "structure"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelDesign/Ground"]
+transform = Transform3D(10, 0, 0, 0, 0.25, 0, 0, 0, 18, 0, 0, 0)
+shape = SubResource("BoxShape3D_10hib")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelDesign/Ground/CollisionShape3D"]
+material_override = ExtResource("4_rnpm1")
+mesh = SubResource("BoxMesh_ehxmw")
+
+[node name="Enemy" parent="LevelDesign" instance=ExtResource("4_5kgvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="height" type="StaticBody3D" parent="LevelDesign" groups=["structure"]]
+transform = Transform3D(1, 0, 0, 0, 15, 0, 0, 0, 1, -3, 8, 7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelDesign/height"]
+shape = SubResource("BoxShape3D_770yt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelDesign/height/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0gnj8")
+
+[node name="height4" type="StaticBody3D" parent="LevelDesign" groups=["structure"]]
+transform = Transform3D(-8.74228e-08, 0, 1, 0, 1, 0, -2, 0, -4.37114e-08, -2.6, 1, -4.65)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelDesign/height4"]
+shape = SubResource("BoxShape3D_770yt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelDesign/height4/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0gnj8")
+
+[node name="height3" type="StaticBody3D" parent="LevelDesign" groups=["structure"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 2, 0, -1, 0, -4.37114e-08, -2.6, 1.5, -1.65)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelDesign/height3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+shape = SubResource("BoxShape3D_770yt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelDesign/height3/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0gnj8")
+
+[node name="height2" type="StaticBody3D" parent="LevelDesign" groups=["structure"]]
+transform = Transform3D(1, 0, 0, 0, 8, 0, 0, 0, 1, -1, 4.5, 7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelDesign/height2"]
+shape = SubResource("BoxShape3D_770yt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelDesign/height2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0gnj8")
+
+[node name="container" parent="LevelDesign" instance=ExtResource("7_67iym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -3)
+
+[node name="Hammer1" parent="LevelDesign" instance=ExtResource("14_oeed6")]
+transform = Transform3D(1.91069e-16, -4.37114e-09, 0.1, -0.1, -4.37114e-09, 0, 4.37114e-09, -0.1, -4.37114e-09, -2.7, 1.576, -4.35)
+
+[node name="Laptop_3" parent="LevelDesign" instance=ExtResource("13_i6q4q")]
+transform = Transform3D(0.1, 0, 0.173205, 0, 0.2, 0, -0.173205, 0, 0.1, -2.6, 1.725, -5.45)
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Player" parent="Players" instance=ExtResource("4_kuvdn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 17, 7)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 25, 50)
+light_energy = 0.75

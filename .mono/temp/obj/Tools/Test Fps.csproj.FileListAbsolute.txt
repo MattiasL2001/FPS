@@ -1,0 +1,6 @@
+C:\Users\Matti\OneDrive\Dokument\Godot Engine\Projects\Test FPS\.mono\temp\bin\Tools\Test Fps.dll
+C:\Users\Matti\OneDrive\Dokument\Godot Engine\Projects\Test FPS\.mono\temp\bin\Tools\Test Fps.pdb
+C:\Users\Matti\OneDrive\Dokument\Godot Engine\Projects\Test FPS\.mono\temp\obj\Tools\Test Fps.csprojAssemblyReference.cache
+C:\Users\Matti\OneDrive\Dokument\Godot Engine\Projects\Test FPS\.mono\temp\obj\Tools\Test Fps.dll
+C:\Users\Matti\OneDrive\Dokument\Godot Engine\Projects\Test FPS\.mono\temp\obj\Tools\Test Fps.pdb
+C:\Users\Matti\OneDrive\Dokument\Godot Engine\Projects\Test FPS\.mono\temp\obj\Tools\Test Fps.csproj.CoreCompileInputs.cache

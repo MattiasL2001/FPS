@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://grh1xucp1ryp"]
+
+[ext_resource type="PackedScene" uid="uid://bbvugffr6w66i" path="res://assets/3D Models/AWP.gltf" id="1_wqhhy"]
+[ext_resource type="AudioStream" uid="uid://3j2bt2monwoj" path="res://assets/Sounds/pistol_sound.wav" id="2_wllpa"]
+
+[node name="AWP12" instance=ExtResource("1_wqhhy")]
+
+[node name="body" parent="." index="1"]
+layers = 2
+
+[node name="barrel" parent="." index="2"]
+layers = 2
+
+[node name="container" parent="." index="3"]
+layers = 2
+
+[node name="scope" parent="." index="4"]
+layers = 2
+
+[node name="scope_2" parent="." index="5"]
+layers = 2
+
+[node name="trigger" parent="." index="6"]
+layers = 2
+
+[node name="stock" parent="." index="7"]
+layers = 2
+
+[node name="stock_2" parent="." index="8"]
+layers = 2
+
+[node name="container_2" parent="." index="9"]
+layers = 2
+
+[node name="magazine" parent="." index="10"]
+layers = 2
+
+[node name="bolt" parent="." index="11"]
+layers = 2
+
+[node name="glass_1" parent="." index="12"]
+layers = 2
+
+[node name="glass_2" parent="." index="13"]
+layers = 2
+
+[node name="Cube" parent="." index="14"]
+layers = 2
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="." index="15"]
+stream = ExtResource("2_wllpa")
