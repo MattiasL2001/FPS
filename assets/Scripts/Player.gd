@@ -152,17 +152,17 @@ func _physics_process(delta):
 		if height > 5:
 			damage(round(pow(height, 2) * 0.3))
 	
-	if (Input.is_action_pressed("jump") and is_on_floor()) and can_jump:
+	if Input.is_action_pressed("jump") and is_on_floor() and can_jump:
 		_jump()
 	
-	if (Input.is_action_pressed("shift")):
+	if Input.is_action_pressed("shift"):
 		speed = sprint_speed
 		is_running = true
 		emit_signal("speed_changed", speed)
 	else:
 		is_running = false
 	
-	if (Input.is_action_pressed("ctrl")):
+	if Input.is_action_pressed("ctrl"):
 		head.set_position(Vector3(0, 0.5, -0.2))
 		speed = crouch_speed
 		emit_signal("speed_changed", speed)
