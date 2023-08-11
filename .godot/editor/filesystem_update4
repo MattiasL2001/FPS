@@ -1,5 +1,6 @@
 res://assets/environment.tres
 res://assets/Scenes/Enemy.tscn
+res://assets/Scripts/AStar2.gd
 res://assets/Scripts/AStar.gd
 res://assets/Scenes/Modular Level.tscn
 res://assets/Scenes/Player.tscn

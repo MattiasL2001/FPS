@@ -12,7 +12,7 @@ const TURN_SPEED = 2
 @onready var raycast = $Eyes/RayCastShooting
 @onready var shoottimer = $ShootTimer
 @onready var raycast_col1 = $Eyes/RayCastCollission
-@onready var astar : AStar = get_tree().root.get_node("Level").get_node("AStar")
+@onready var astar = get_tree().root.get_node("Level").get_node("AStar")
 @onready var diagonal_movement : bool
 var max_look_angle_y : int = 75
 var max_look_angle_x : int = 50
@@ -76,8 +76,20 @@ func _movement():
 #				if global_transform.origin.distance_to(current_target) < 5:
 #					find_next_point_in_path()
 #				var points = astar.points
+
+#				path = astar.find_path(get_transform().origin, target.get_transform().origin)
 				path = _find_path(get_transform().origin, target.get_transform().origin)
+				
 #				eyes.get_basis().get_euler().y = 0
+				
+#				for point in path:
+#					var point_str = "(" + str(point[0]) + ", 0, " + str(point[2]) + ")"
+#					var mesh = astar.get_node("cube_mesh_" + point_str)
+#					var material = StandardMaterial3D.new()
+#					material.albedo_color = Color.WHITE
+#					mesh.set_surface_override_material(0, material)
+				
+				#use this insstead of the code above for the original AStar script
 				
 				for point in path:
 					var mesh : MeshInstance3D = (
@@ -218,11 +230,3 @@ func _trace_path(from : AStar_Cell, to : AStar_Cell):
 		current = current.parent
 	point_path.reverse()
 	return point_path
-
-#func find_next_point_in_path():
-#	if path.size() > 0:
-#		var new_target = path.pop_front()
-#		new_target.y = global_transform.origin.y
-#		current_target = new_target
-#	else:
-#		current_target = Vector3()

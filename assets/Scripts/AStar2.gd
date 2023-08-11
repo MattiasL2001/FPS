@@ -1,6 +1,7 @@
 extends Node
-class_name AStar
+class_name AStar2
 
+var astar = AStar3D.new()
 var cell_size := 1
 var cell_y := .3
 @export var points := {}
@@ -26,37 +27,46 @@ func _add_points(pathables : Array):
 	for pathable in pathables:
 		var mesh : MeshInstance3D
 		var aabb : AABB
-		if pathable.get_parent().is_in_group("Level"):
-			mesh = pathable
-			aabb = mesh.get_transformed_aabb()
-		else:
-			mesh = pathable
-			aabb = mesh.get_aabb()
-			aabb.size.x = mesh.transform.basis.x[0]
-			aabb.size.z = mesh.transform.basis.z[2]
+		var start_point = aabb.position
+		mesh = pathable
+		aabb = mesh.get_aabb()
+		aabb.size.x = mesh.transform.basis.x[0]
+		aabb.size.z = mesh.transform.basis.z[2]
 		
 		var x_steps = aabb.size.x / cell_size
 		var z_steps = aabb.size.z / cell_size
 		
 		if x_steps > 0 and z_steps > 0:
-			for x in range(int(x_steps -1)):
-				for z in range(int(z_steps -1)):
-					var next_point = Vector3(
-						-aabb.size.x / 2 + cell_size * 0.5 + cell_size * x,
-						0,
-						-aabb.size.z / 2 + cell_size * 0.5 + cell_size * z)
+			for x in x_steps -1:
+				for z in z_steps -1:
+					var next_point = start_point + Vector3(
+						x * cell_size + cell_size - 0.5 * aabb.size.x,
+						0, z * cell_size + cell_size - 0.5 * aabb.size.z)
 					_add_point(next_point)
 				
-func _add_point(position : Vector3):
-	var node_point : AStar_Cell = AStar_Cell.new()
-	node_point.position = world_to_astar(position)
-	node_point.position.y = cell_y
-	var id = str(round(node_point.position[0])) + "_" + str(round(node_point.position[2]))
-	points.merge({id: node_point})
+func _add_point(node : Vector3):
+	node.y = cell_y
+	var id = astar.get_available_point_id()
+	astar.add_point(id, node)
+	points[world_to_astar(node)] = id
 	
 func _connect_points():
-	for point_id in points:
-		var point = points[point_id]
+	for point in points:
+		var pos_str = str(point).split(",")
+		var world_pos = Vector3(int(pos_str[0]), int(pos_str[1]), int(pos_str[2]))
+		var search_coords = [-cell_size, 0, cell_size]
+		for x in search_coords:
+			for z in search_coords:
+				var search_offset = Vector3(x, 0, z)
+				if search_offset == Vector3.ZERO:
+					continue
+				
+				var potential_neighbor = world_to_astar(world_pos + search_offset)
+				if points.has(potential_neighbor):
+					var current_id = points[point]
+					var neighbor_id = points[potential_neighbor]
+					if not astar.are_points_connected(current_id, neighbor_id):
+						astar.connect_points(current_id, neighbor_id)
 		
 		var cube := BoxMesh.new()
 		var mesh_instance := MeshInstance3D.new()
@@ -66,29 +76,13 @@ func _connect_points():
 		mesh_instance.set_surface_override_material(0, material)
 		cube.size = Vector3(cell_size * .2, cell_size * .2, cell_size * .2)
 		add_child(mesh_instance)
-		mesh_instance.global_transform.origin = Vector3(point.position[0], .5, point.position[2])
-		mesh_instance.set_name("cube_mesh_" + point_id)
-		
-	for point_id in points:
-		var point = points[point_id]
-		var potential_neighbors = [
-			
-			#all the neighbors that lies next to the current point:
-			Vector3(point.position[0] + 1, point.position[1], point.position[2]),
-			Vector3(point.position[0], point.position[1], point.position[2] + 1),
-			Vector3(point.position[0] - 1, point.position[1], point.position[2]),
-			Vector3(point.position[0], point.position[1], point.position[2] - 1),
-			
-			#corner-neighbors:
-			Vector3(point.position[0] + 1, point.position[1], point.position[2] + 1),
-			Vector3(point.position[0] + 1, point.position[1], point.position[2] - 1),
-			Vector3(point.position[0] - 1, point.position[1], point.position[2] - 1),
-			Vector3(point.position[0] - 1, point.position[1], point.position[2] + 1)
-		]
-		for potential_neighbor in potential_neighbors:
-			var potential_neighbor_id = get_astar_id(potential_neighbor)
-			if points.has(potential_neighbor_id) && !points[potential_neighbor_id].is_blocked:
-				points[point_id].neighbors.append(potential_neighbor)
+		mesh_instance.global_transform.origin = Vector3(int(pos_str[0]), cell_y, int(pos_str[2]))
+		mesh_instance.set_name("cube_mesh_" + pos_str[0] + ", " + "0," + pos_str[2])
+
+func find_path(from: Vector3, to: Vector3) -> Array:
+	var start_id = astar.get_closest_point(from)
+	var end_id = astar.get_closest_point(to)
+	return astar.get_point_path(start_id, end_id)
 
 func evaluate_neighbors(current_node : AStar_Cell, start_node : AStar_Cell, target_node : AStar_Cell):
 	var neighbor_count = 0
