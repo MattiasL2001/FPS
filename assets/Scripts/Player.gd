@@ -15,12 +15,12 @@ var is_running : bool = false
 var crouch_gravity = gravity * 1.5
 @export var jump_power = 15
 @export var inertia = 100
-@export var current_weapon : int = 1
+@export var current_weapon : Weapon
 @export var mouse_sensitivity : float = 0.15
 var weapon_switch : bool = true
 var grenade_ammo : int = 1
-@export @onready var first_weapon : Node3D = null
-@export @onready var second_weapon : Node3D = null
+@export var first_weapon : Node3D
+@export var second_weapon : Node3D
 @onready var grenade_packed = preload("res://assets/Scenes/Grenade.tscn")
 @onready var grenade = grenade_packed.instantiate()
 
@@ -32,7 +32,7 @@ var grenade_ammo : int = 1
 @onready var camera : Camera3D = $Head/Camera
 @onready var gun_cam : Camera3D = $Head/Camera/SubViewportContainer/SubViewport/GunCamera
 @onready var interact_text = $Head/Camera/UI/interact_text
-@onready var crosshair = $Head/Camera/UI/TextureRect
+@onready var crosshair = $Head/Camera/UI/Crosshair/TextureRect
 @onready var audio : AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var crosshairs = []
 @onready var normal_crosshair = preload("res://assets/Images/Crosshair_2.png")
@@ -54,19 +54,18 @@ var camera_x_rotation = 0
 func _ready():
 	first_weapon = $Head/Camera/FirstWeapon
 	second_weapon = $Head/Camera/SecondWeapon
-	crosshairs.append($Head/Camera/UI/TextureRect2)
-	crosshairs.append($Head/Camera/UI/TextureRect3)
-	crosshairs.append($Head/Camera/UI/TextureRect4)
-	crosshairs.append($Head/Camera/UI/TextureRect5)
+	current_weapon = first_weapon
+	crosshairs.append($Head/Camera/UI/Crosshair/TextureRect2)
+	crosshairs.append($Head/Camera/UI/Crosshair/TextureRect3)
+	crosshairs.append($Head/Camera/UI/Crosshair/TextureRect4)
+	crosshairs.append($Head/Camera/UI/Crosshair/TextureRect5)
 	raycast_shooting.set_target_position(Vector3(0, 0, -first_weapon.fire_range))
-	current_weapon = first_weapon.weapon_class
 	second_weapon.visible = false
 	emit_signal("speed_changed", speed)
 	emit_signal("health_changed", health)
-	emit_signal("weapon_changed", current_weapon)
+	emit_signal("weapon_changed", current_weapon.weapon_class)
 	_change_ammo_ui()
 	_updater()
-#	first_weapon.emit_signal("ammo_changed", first_weapon.current_ammo, first_weapon.ammo_total)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -83,7 +82,7 @@ func _input(event):
 			_weapon_switch()
 
 func _updater():
-	if (current_weapon == 1 and first_weapon.check_array_col() == true) or (current_weapon == 2 and second_weapon.check_array_col() == true):
+	if (current_weapon == first_weapon and first_weapon.check_array_col() == true) or (current_weapon == second_weapon and second_weapon.check_array_col() == true):
 		crosshair.texture = point_2
 		for ch in crosshairs:
 			ch.texture = red_crosshair
@@ -103,8 +102,6 @@ func _process(delta):
 		Vector3(to_global(get_node("Head/Camera/Grenade_Pos").get_position())))
 		
 func _physics_process(delta):
-#	var translation = self.get_translation()
-	#var rotation = global_transform.basis,get_euler()
 	var rotation = head.global_transform.basis.get_euler().y
 	emit_signal("update_transform", get_position(), rotation)
 	
@@ -167,7 +164,6 @@ func _physics_process(delta):
 		speed = crouch_speed
 		emit_signal("speed_changed", speed)
 	else:
-#		head.set_translation(Vector3(0, 0.7, -0.2))
 		head.set_position(Vector3(0, 0.7, -0.2))
 	
 	if !Input.is_action_pressed("ctrl") and !Input.is_action_pressed("shift"):
@@ -212,7 +208,8 @@ func _physics_process(delta):
 	if Input.is_action_just_released("Grenade"):
 		if grenade_ammo > 0 and get_node("../Grenade") != null:
 			get_node("../Grenade").freeze = false
-			get_node("../Grenade").throw()
+#			get_node("../Grenade").throw()
+			get_node("../Grenade")._throw(-camera.global_transform.basis.z.normalized())
 			grenade_ammo -= 1
 	
 	if Input.is_action_just_released("Grenade") and get_node("../Grenade") == null:
@@ -238,10 +235,12 @@ func _jump():
 	can_jump = true
 
 func _weapon_switch():
+	get_node("Head/Camera/UI/Reloading").visible = false
+	
 	if weapon_switch:
-		if current_weapon == 1:
-			current_weapon += 1
-			emit_signal("weapon_changed", current_weapon)
+		if current_weapon == first_weapon:
+			current_weapon = second_weapon
+			emit_signal("weapon_changed", current_weapon.weapon_class)
 			first_weapon.is_active = false
 			second_weapon.is_active = true
 			first_weapon.visible = false
@@ -252,9 +251,9 @@ func _weapon_switch():
 			_change_ammo_ui()
 			weapon_switch = false
 
-		elif current_weapon == 2:
-			current_weapon -= 1
-			emit_signal("weapon_changed", current_weapon)
+		elif current_weapon == second_weapon:
+			current_weapon = first_weapon
+			emit_signal("weapon_changed", current_weapon.weapon_class)
 			first_weapon.is_active = true
 			second_weapon.is_active = false
 			first_weapon.visible = true
@@ -274,14 +273,14 @@ func damage(damage):
 	emit_signal("health_changed", health)
 
 func _change_ammo_ui():
-	if current_weapon == 1:
+	if current_weapon == first_weapon:
 		emit_signal("ammo_changed", first_weapon.current_ammo, first_weapon.ammo_total)
-	elif current_weapon == 2:
+	elif current_weapon == second_weapon:
 		emit_signal("ammo_changed", second_weapon.current_ammo, second_weapon.ammo_total)
 
 func _on_Area_body_entered(body):
 	if body != self:
-		print(str(body.get_name()) + " >:D")
+		pass
 
 func check_collision():
 	if interact_raycast.is_colliding():

@@ -1,8 +1,8 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1674164371
+::res://::1674654248
 export_presets.cfg::TextFile::-1::1658858935::0::1::::<><>::
-::res://assets/::1674153118
-environment.tres::Environment::7378468779249063764::1674153118::0::1::::<><>::
+::res://assets/::1674392097
+environment.tres::Environment::7378468779249063764::1674392097::0::1::::<><>::
 favicon.png::CompressedTexture2D::5277229873534546316::1658839823::1674083954::1::::<><>::
 icon.png::CompressedTexture2D::1704303669891223044::1616971259::1674083954::1::::<><>::
 SIL Open Font License.txt::TextFile::-1::1616971259::0::1::::<><>::
@@ -57,14 +57,14 @@ green.tres::StandardMaterial3D::3397369558562987285::1658774972::0::1::::<><>::
 grid.material::StandardMaterial3D::3802178309277577319::1658774972::0::1::::<><>::uid://lr0avb7g5g61
 Material_001.material::StandardMaterial3D::-1::1616971259::0::1::::<><>::
 meshMat.tres::StandardMaterial3D::8096495644725958753::1649480077::0::1::::<><>::
-::res://assets/Scenes/::1674153118
+::res://assets/Scenes/::1674392097
 Bullet_Hole.tscn::PackedScene::8538317011884883153::1659070960::0::1::::<><>::uid://coyags3onmbtx<>res://assets/Scripts/BulletHole.gd
-Enemy.tscn::PackedScene::8774705623518411679::1674153118::0::1::::<><>::res://assets/Scripts/Enemy.gd<>uid://dnmadoandf442
+Enemy.tscn::PackedScene::8774705623518411679::1674392097::0::1::::<><>::res://assets/Scripts/Enemy.gd<>uid://dnmadoandf442
 Grenade.tscn::PackedScene::9101940557645300414::1674083911::0::1::::<><>::res://assets/Scripts/Grenade.gd
-Level2.tscn::PackedScene::8962993040150446428::1674153118::0::1::::<><>::res://assets/Scripts/AStar.gd<>res://assets/Scripts/GameManager.gd<>uid://dxasecjq6pvt4<>uid://cfkphne5uh1b3<>uid://buf2k6mmcjxt4<>uid://bo4y72mdb4o3w<>res://assets/Scripts/LightBox.gd<>uid://c8ixbs1gv6dv2<>uid://b8r477ubrqkfs<>uid://ddegkkayo3nvw
-Modular Level.tscn::PackedScene::6557267898328637118::1674153117::0::1::::<><>::uid://dcd5tvfbfl2yq<>uid://dxasecjq6pvt4<>uid://cfkphne5uh1b3<>res://assets/Scripts/GameManager.gd<>res://assets/Scripts/AStar.gd
-Player.tscn::PackedScene::5145353308938657246::1674153118::0::1::::<><>::res://assets/Scripts/UI.gd<>res://assets/Scripts/Player.gd<>res://assets/Scripts/MinimapCamera.gd<>uid://cm1q76mk4007h<>uid://c5moywth3hql<>uid://dnmadoandf442<>uid://grh1xucp1ryp<>res://assets/Scripts/Sniper1.gd<>uid://c3tnsuusy44tm
-::res://assets/Scripts/::1674150782
+Level2.tscn::PackedScene::8962993040150446428::1674392097::0::1::::<><>::res://assets/Scripts/AStar.gd<>res://assets/Scripts/GameManager.gd<>uid://dxasecjq6pvt4<>uid://cfkphne5uh1b3<>uid://buf2k6mmcjxt4<>uid://bo4y72mdb4o3w<>res://assets/Scripts/LightBox.gd<>uid://c8ixbs1gv6dv2<>uid://b8r477ubrqkfs<>uid://ddegkkayo3nvw
+Modular Level.tscn::PackedScene::6557267898328637118::1674392096::0::1::::<><>::uid://dcd5tvfbfl2yq<>uid://dxasecjq6pvt4<>uid://cfkphne5uh1b3<>res://assets/Scripts/GameManager.gd<>res://assets/Scripts/AStar.gd
+Player.tscn::PackedScene::5145353308938657246::1674392097::0::1::::<><>::res://assets/Scripts/UI.gd<>res://assets/Scripts/Player.gd<>res://assets/Scripts/MinimapCamera.gd<>uid://cm1q76mk4007h<>uid://c5moywth3hql<>uid://dnmadoandf442<>uid://grh1xucp1ryp<>res://assets/Scripts/Sniper1.gd<>uid://c3tnsuusy44tm
+::res://assets/Scripts/::1674177465
 AStar.gd::GDScript::-1::1670414039::0::1::::AStar<>Node<>::
 AStar_2.gd::GDScript::-1::1657980240::0::1::::<>Node<>::
 AStar_Cell.gd::GDScript::-1::1659314948::0::1::::AStar_Cell<>Node<>::
@@ -77,7 +77,7 @@ Grenade.gd::GDScript::-1::1666171690::0::1::::<>RigidBody3D<>::
 LightBox.gd::GDScript::-1::1674051978::0::1::::<>RigidBody3D<>::
 MinimapCamera.gd::GDScript::-1::1656864313::0::1::::<>Camera3D<>::
 Pistol1.gd::GDScript::-1::1659203359::0::1::::<>Weapon<>::
-Player.gd::GDScript::-1::1674149703::0::1::::<>CharacterBody3D<>::
+Player.gd::GDScript::-1::1674177465::0::1::::<>CharacterBody3D<>::
 Rifle1.gd::GDScript::-1::1651183557::0::1::::<>Weapon<>::
 Sniper1.gd::GDScript::-1::1659128707::0::1::::<>Weapon<>::
 UI.gd::GDScript::-1::1674150643::0::1::::<>Control<>::

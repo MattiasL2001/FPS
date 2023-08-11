@@ -2,22 +2,25 @@ extends Control
 
 @onready var speed_text = $speed_text
 @onready var ammo_text = $ammo_text
+@onready var coords_text = $coords_text
 @onready var health_text = $health_text
 @onready var FPS_text = $FPS_text
 @onready var interact_text = $interact_text
 @onready var hotbar_text = $Hotbar_text
+@onready var player : CharacterBody3D = self.get_parent().get_parent().get_parent()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	speed_text.set_text("Speed: ")
 	ammo_text.set_text("Ammo: ")
 	interact_text.set_visible(false)
 
+func _process(delta):
+	FPS_text.set_text("FPS: " + str(Engine.get_frames_per_second()))
+	coords_text.set_text(
+		"Coords: " + "X: " + str(round(player.position.x)) + "   Z: " + str(round(player.position.z)))
+
 func _on_player_speed_changed(speed):
 	speed_text.set_text("Speed: " + str(speed))
-
-func _on_player_timer_finished():
-	FPS_text.set_text("FPS: " + str(Engine.get_frames_per_second()))
 
 func _on_player_health_changed(health):
 	health_text.set_text("Health: " + str(health))

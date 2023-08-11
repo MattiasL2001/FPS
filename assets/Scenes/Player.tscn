@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://cfkphne5uh1b3"]
+[gd_scene load_steps=17 format=3 uid="uid://ctkitjg74vkyt"]
 
 [ext_resource type="Script" path="res://assets/Scripts/UI.gd" id="1"]
 [ext_resource type="Script" path="res://assets/Scripts/Player.gd" id="3"]
 [ext_resource type="Script" path="res://assets/Scripts/MinimapCamera.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://cm1q76mk4007h" path="res://assets/Images/Point.png" id="5_13scg"]
 [ext_resource type="Texture2D" uid="uid://c5moywth3hql" path="res://assets/Images/Crosshair_2.png" id="5_ynnmn"]
+[ext_resource type="Texture2D" uid="uid://bauiufvbddmkm" path="res://assets/Images/Loading.png" id="7_1dl7g"]
 [ext_resource type="Material" uid="uid://dnmadoandf442" path="res://assets/Materials/meshMat.tres" id="8"]
 [ext_resource type="PackedScene" uid="uid://grh1xucp1ryp" path="res://assets/3D Models/awp.tscn" id="8_71jvt"]
-[ext_resource type="Script" path="res://assets/Scripts/Sniper1.gd" id="9_6lfri"]
-[ext_resource type="PackedScene" uid="uid://c3tnsuusy44tm" path="res://assets/3D Models/Pistol.tscn" id="9_owff1"]
+[ext_resource type="PackedScene" uid="uid://cdafydtc3mp4r" path="res://assets/3D Models/Pistol.tscn" id="9_o3wni"]
+[ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="11_hsj3n"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.9
@@ -16,6 +17,30 @@ height = 1.9
 [sub_resource type="CapsuleMesh" id="2"]
 material = ExtResource("8")
 height = 1.9
+
+[sub_resource type="LabelSettings" id="LabelSettings_n84x6"]
+font_size = 20
+
+[sub_resource type="Animation" id="Animation_1dcnt"]
+resource_name = "Reloading"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0smit"]
+_data = {
+"Reloading": SubResource("Animation_1dcnt")
+}
 
 [sub_resource type="CapsuleShape3D" id="6"]
 
@@ -87,6 +112,18 @@ text = "FPS:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="coords_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 900.0
+offset_right = 1000.0
+offset_bottom = 926.0
+text = "hello"
+label_settings = SubResource("LabelSettings_n84x6")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_layout_mode = 1
+
 [node name="ammo_text" type="Label" parent="Head/Camera/UI"]
 layout_mode = 0
 offset_left = 1861.0
@@ -133,18 +170,30 @@ projection = 1
 size = 25.0
 script = ExtResource("4")
 
-[node name="TextureRect" type="TextureRect" parent="Head/Camera/UI"]
-custom_minimum_size = Vector2(4, 4)
+[node name="CenterContainer" type="CenterContainer" parent="Head/Camera/UI"]
 layout_mode = 0
+offset_left = 956.0
+offset_top = 536.0
+offset_right = 964.0
+offset_bottom = 544.0
+
+[node name="Crosshair" type="Control" parent="Head/Camera/UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera/UI/Crosshair"]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
 offset_left = 958.0
 offset_top = 538.0
 offset_right = 962.0
 offset_bottom = 542.0
 texture = ExtResource("5_13scg")
 
-[node name="TextureRect2" type="TextureRect" parent="Head/Camera/UI"]
+[node name="TextureRect2" type="TextureRect" parent="Head/Camera/UI/Crosshair"]
 custom_minimum_size = Vector2(8, 8)
-layout_mode = 0
+layout_mode = 2
 offset_left = 956.0
 offset_top = 508.0
 offset_right = 972.0
@@ -152,9 +201,9 @@ offset_bottom = 540.0
 scale = Vector2(0.5, 0.75)
 texture = ExtResource("5_ynnmn")
 
-[node name="TextureRect3" type="TextureRect" parent="Head/Camera/UI"]
+[node name="TextureRect3" type="TextureRect" parent="Head/Camera/UI/Crosshair"]
 custom_minimum_size = Vector2(8, 8)
-layout_mode = 0
+layout_mode = 2
 offset_left = 956.0
 offset_top = 548.0
 offset_right = 972.0
@@ -162,9 +211,9 @@ offset_bottom = 580.0
 scale = Vector2(0.5, 0.75)
 texture = ExtResource("5_ynnmn")
 
-[node name="TextureRect4" type="TextureRect" parent="Head/Camera/UI"]
+[node name="TextureRect4" type="TextureRect" parent="Head/Camera/UI/Crosshair"]
 custom_minimum_size = Vector2(8, 8)
-layout_mode = 0
+layout_mode = 2
 offset_left = 952.0
 offset_top = 536.0
 offset_right = 968.0
@@ -173,9 +222,9 @@ rotation = 1.5708
 scale = Vector2(0.5, 0.75)
 texture = ExtResource("5_ynnmn")
 
-[node name="TextureRect5" type="TextureRect" parent="Head/Camera/UI"]
+[node name="TextureRect5" type="TextureRect" parent="Head/Camera/UI/Crosshair"]
 custom_minimum_size = Vector2(8, 8)
-layout_mode = 0
+layout_mode = 2
 offset_left = 968.0
 offset_top = 544.0
 offset_right = 984.0
@@ -184,12 +233,16 @@ rotation = -1.5708
 scale = Vector2(0.5, 0.75)
 texture = ExtResource("5_ynnmn")
 
-[node name="CenterContainer" type="CenterContainer" parent="Head/Camera/UI"]
-layout_mode = 0
-offset_left = 956.0
-offset_top = 536.0
-offset_right = 964.0
-offset_bottom = 544.0
+[node name="Reloading" type="Sprite2D" parent="Head/Camera/UI"]
+position = Vector2(960, 540)
+rotation = 6.28319
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("7_1dl7g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera/UI/Reloading"]
+libraries = {
+"": SubResource("AnimationLibrary_0smit")
+}
 
 [node name="Grenade_Pos" type="Node3D" parent="Head/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
@@ -210,21 +263,20 @@ render_target_update_mode = 4
 [node name="GunCamera" type="Camera3D" parent="Head/Camera/SubViewportContainer/SubViewport"]
 cull_mask = 2
 
-[node name="SecondWeapon" parent="Head/Camera" instance=ExtResource("9_owff1")]
-transform = Transform3D(-0.0355273, -0.00307652, -0.0934257, 0.000523278, 0.0999377, -0.00348995, 0.0934748, -0.00172876, -0.0354891, 0.23, -0.175, -0.4)
-
 [node name="FirstWeapon" parent="Head/Camera" instance=ExtResource("8_71jvt")]
 transform = Transform3D(-0.0695865, 0, -0.495134, 0, 0.5, 0, 0.495134, 0, -0.0695865, 0.29, -0.2, -0.95)
-script = ExtResource("9_6lfri")
+
+[node name="SecondWeapon1" parent="Head/Camera" instance=ExtResource("9_o3wni")]
+transform = Transform3D(-0.0358534, -0.00307046, -0.0933012, 0.000523278, 0.0999377, -0.00348995, 0.0933502, -0.00173949, -0.035815, 0.23, -0.175, -0.4)
+visible = false
+
+[node name="SecondWeapon" parent="Head/Camera" instance=ExtResource("11_hsj3n")]
+transform = Transform3D(-0.0453303, 0, -0.194795, 0, 0.2, 0, 0.194795, 0, -0.0453303, 0.377, -0.267, -0.755)
 
 [node name="CollisionDetectionArea" type="Area3D" parent="."]
 
 [node name="CollisionShape" type="CollisionShape3D" parent="CollisionDetectionArea"]
 shape = SubResource("6")
-
-[node name="FPS Timer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
 
 [node name="Interact Timer" type="Timer" parent="."]
 wait_time = 0.2
@@ -239,5 +291,4 @@ max_distance = 20.0
 [connection signal="speed_changed" from="." to="Head/Camera/UI" method="_on_player_speed_changed"]
 [connection signal="weapon_changed" from="." to="Head/Camera/UI" method="_on_player_weapon_changed"]
 [connection signal="body_entered" from="CollisionDetectionArea" to="." method="_on_Area_body_entered"]
-[connection signal="timeout" from="FPS Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Interact Timer" to="." method="_on_Interact_Timer_timeout"]

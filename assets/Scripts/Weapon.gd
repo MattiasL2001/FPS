@@ -10,11 +10,11 @@ class_name Weapon
 @export var clip_size = 0
 @export var reload_rate = 0
 @export var ammo_total = 0
+@onready var animation_player : AnimationPlayer = get_node("../UI/Reloading/AnimationPlayer")
 @onready var audio : AudioStreamPlayer3D = get_node("Audio")
 var camera_shake : float
 var camera_position : Vector3
 @onready var bullet_hole = preload("res://assets/Scenes/Bullet_Hole.tscn")
-#@onready var raycast : RayCast3D = get_node("/root/Level/Players//Player/Head/Camera/RayCastShooting")
 @onready var raycast : RayCast3D = get_parent().get_node("RayCastShooting")
 @onready var camera : Camera3D = get_node("../")
 signal ammo_changed
@@ -31,10 +31,10 @@ var sway_y :Vector3 = Vector3(0, 0, .25)
 @onready var sway_normal : Vector3 = get_rotation()
 
 func _ready():
+	get_node("../UI/Reloading").visible = false
 	camera_position = camera.get_position()
 	current_ammo = clip_size
 	emit_signal("ammo_changed", current_ammo, ammo_total)
-#	get_node("../../../")._change_ammo_ui(current_ammo, ammo_total)
 	raycast.set_target_position(Vector3(0, 0, -fire_range))
 	
 	if weapon_class == 1:
@@ -62,14 +62,11 @@ func _process(delta):
 	
 	#executes when the player presses the shoot button and can shoot
 	if Input.is_action_pressed("mouseClick") and can_fire and is_active:
-#		camera.translate(Vector3(camera_shake, camera_shake, 0))
-#		camera.translate(Vector3(lerp(camera.get_position().x, randf_range(camera_shake, -camera_shake), 0.5), lerp(camera.get_position().y, randf_range(camera_shake, -camera_shake), 0.5), 0)
 		if current_ammo > 0 and not reloading:
-			if audio != null and !audio.playing:
+			if (audio != null and !audio.playing) || (audio != null and weapon_name.contains("Rifle")):
 				audio.play(0)
 			var offset = randf_range(-camera_shake, camera_shake)
 			var tween := create_tween()
-#			connect("finished", self, "_on_tween_finished")
 			tween.finished.connect(func(): tween_finished = true)
 			var camera_shake_vector = Vector3(
 				randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), -0.03)
@@ -92,8 +89,7 @@ func _process(delta):
 		elif not reloading and is_active:
 			_reloading()
 			
-			#executes when the player still have bullets im his mag, but presses the "reload"
-			#button to reload anyway
+			#executes when the player still have bullets in the mag, but presses the "reload" button
 	elif Input.is_action_just_pressed("reload") and current_ammo < clip_size and is_active:
 		_reloading()
 	
@@ -102,9 +98,15 @@ func _process(delta):
 
 func _reloading():
 			reloading = true
+			get_node("../UI/Reloading").visible = true
+			
+			animation_player.speed_scale = animation_player.speed_scale / reload_rate
+			animation_player.play("Reloading")
 			
 			#waits "reload_rate" amount of secs, which works as a reload delay
 			await(get_tree().create_timer(reload_rate)).timeout
+			get_node("../UI/Reloading").visible = false
+			animation_player.speed_scale = 1
 			
 			if is_active:
 				if reloading:
@@ -116,7 +118,6 @@ func _reloading():
 						ammo_total = 0
 					emit_signal("ammo_changed", current_ammo, ammo_total)
 					get_node("../../../")._change_ammo_ui()
-					#ammo_text.set_text(str(current_ammo) + "/" + str(ammo_total)) 
 					reloading = false
 
 func check_array_col():
@@ -131,20 +132,10 @@ func check_collision():
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if collider.is_in_group("Enemies"):
-			collider.queue_free()
-			print("Killed: " + str(collider.name) + " with the gun: " + str(weapon_name))
-#			print(sqrt(pow((raycast.get_translation().x - collider.get_translation().x), 2) +
-#			pow(raycast.get_translation().z - collider.get_translation().z, 2)))
-			print(String(str(raycast.get_position().z)) + "::")
-			print(String(str(collider.get_position().z)) + ":-")
+			collider.take_damage(damage)
 			
 		elif !collider.is_in_group("Player") || !collider.is_in_group("Enemies"):
 			var b_h = bullet_hole.instantiate()
-			print("collider scale: " ,collider.get_scale().x/collider.get_scale().y)
-#			if (collider.get_scale().x > collider.get_scale().y):
-#				b_h.set_scale(Vector3(collider.get_scale().y / collider.get_scale().x, collider.get_scale().y, b_h.get_scale().z))
-#			if (collider.get_scale().x < collider.get_scale().y):
-#				b_h.set_scale(Vector3(collider.get_scale().x, collider.get_scale().x / collider.get_scale().y, b_h.get_scale().z))
 			raycast.get_collider().get_node("../").get_node("../").add_child(b_h)
 			b_h.global_transform.origin = raycast.get_collision_point()
 			b_h.rotate_y(raycast.get_rotation().y)
