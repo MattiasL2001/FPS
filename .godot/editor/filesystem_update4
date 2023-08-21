@@ -1,10 +1,7 @@
 res://assets/environment.tres
-res://assets/Scenes/Enemy.tscn
-res://assets/Scripts/AStar2.gd
-res://assets/Scripts/AStar.gd
 res://assets/Scenes/Modular Level.tscn
 res://assets/Scenes/Player.tscn
 res://assets/3D Models/awp.tscn
 res://assets/3D Models/Pistol.tscn
 res://assets/3D Models/M16.tscn
-res://assets/Scripts/Enemy.gd
+res://assets/Scenes/Enemy.tscn

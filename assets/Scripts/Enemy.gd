@@ -77,26 +77,32 @@ func _movement():
 #					find_next_point_in_path()
 #				var points = astar.points
 
-#				path = astar.find_path(get_transform().origin, target.get_transform().origin)
-				path = _find_path(get_transform().origin, target.get_transform().origin)
+				path = astar.find_path(get_transform().origin, target.get_transform().origin)
+#				path = _find_path(get_transform().origin, target.get_transform().origin)
 				
 #				eyes.get_basis().get_euler().y = 0
+
+				for child in astar.get_children():
+					var mesh : MeshInstance3D = child
+					var material = StandardMaterial3D.new()
+					material.albedo_color = Color.GREEN
+					mesh.set_surface_override_material(0, material)
 				
-#				for point in path:
-#					var point_str = "(" + str(point[0]) + ", 0, " + str(point[2]) + ")"
-#					var mesh = astar.get_node("cube_mesh_" + point_str)
-#					var material = StandardMaterial3D.new()
-#					material.albedo_color = Color.WHITE
-#					mesh.set_surface_override_material(0, material)
+				for point in path:
+					var point_str = "(" + str(point[0]) + ", 0, " + str(point[2]) + ")"
+					var mesh = astar.get_node("cube_mesh_" + point_str)
+					var material = StandardMaterial3D.new()
+					material.albedo_color = Color.WHITE
+					mesh.set_surface_override_material(0, material)
 				
 				#use this insstead of the code above for the original AStar script
 				
-				for point in path:
-					var mesh : MeshInstance3D = (
-						astar.get_node("cube_mesh_" + astar.get_astar_id(point.position)))
-					var material : StandardMaterial3D = StandardMaterial3D.new()
-					material.albedo_color = Color.WHITE
-					mesh.set_surface_override_material(0, material)
+#				for point in path:
+#					var mesh : MeshInstance3D = (
+#						astar.get_node("cube_mesh_" + astar.get_astar_id(point.position)))
+#					var material : StandardMaterial3D = StandardMaterial3D.new()
+#					material.albedo_color = Color.WHITE
+#					mesh.set_surface_override_material(0, material)
 			
 	await(get_tree().create_timer(1).timeout)
 	_movement()
