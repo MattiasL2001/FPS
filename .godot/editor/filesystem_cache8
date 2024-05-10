@@ -1,63 +1,65 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1692535924
-export_presets.cfg::TextFile::-1::1658862535::0::1::::<><>::
-::res://assets/::1692094996
-environment.tres::Environment::7378468779249063764::1692094996::0::1::::<><>::
-favicon.png::CompressedTexture2D::5277229873534546316::1658843423::1676093844::1::::<><>::
-icon.png::CompressedTexture2D::1704303669891223044::1616974859::1676093844::1::::<><>::
-SIL Open Font License.txt::TextFile::-1::1616974859::0::1::::<><>::
-::res://assets/3D Models/::1692094996
-AWP.gltf::PackedScene::2501186785940650402::1674082175::1676093844::1::::<><>::
-awp.tscn::PackedScene::456700172283202947::1692094996::0::1::::<><>::uid://bbvugffr6w66i::::res://assets/3D Models/AWP.gltf<>res://assets/Scripts/Sniper1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
-M16.gltf::PackedScene::6379740526962361478::1691076192::1691076230::1::::<><>::
-M16.tscn::PackedScene::6383326065983407412::1692094996::0::1::::<><>::uid://cw5nnn5873ida::::res://assets/3D Models/M16.gltf<>res://assets/Scripts/Rifle1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
-Pistol.gltf::PackedScene::3189297400211626546::1678073321::1678073352::1::::<><>::
-Pistol.tscn::PackedScene::4983754529367961671::1692094996::0::1::::<><>::uid://blo6i6ejdip8e::::res://assets/3D Models/Pistol.gltf<>res://assets/Scripts/Pistol1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
-::res://assets/3D Models/Modular Level/::1676104013
-Cube.tscn::PackedScene::7307689422251690804::1676093388::0::1::::<><>::
-::res://assets/Images/::1676093844
-Crosshair.png::CompressedTexture2D::563015519890804597::1642209604::1676093844::1::::<><>::
-Crosshair_2.png::CompressedTexture2D::203063920345561335::1659060996::1676093844::1::::<><>::
-Crosshair_3.png::CompressedTexture2D::3866435617754723251::1659071614::1676093844::1::::<><>::
-health1.png::CompressedTexture2D::7357493686492304805::1616974859::1676093844::1::::<><>::
-health_over.png::CompressedTexture2D::4040400393259764681::1616974859::1676093844::1::::<><>::
-health_under.png::CompressedTexture2D::2864330534062665377::1616974859::1676093844::1::::<><>::
-Loading.png::CompressedTexture2D::2428229985701746232::1675726719::1676093844::1::::<><>::
-Point.png::CompressedTexture2D::5669811577192993027::1659073629::1676093844::1::::<><>::
-Point_2.png::CompressedTexture2D::5428234446817036079::1659073053::1676093844::1::::<><>::
-::res://assets/Materials/::1658778572
-emissionMat.tres::StandardMaterial3D::-1::1642592770::0::1::::<><>::
-green.tres::StandardMaterial3D::3397369558562987285::1658778572::0::1::::<><>::
-grid.material::StandardMaterial3D::3802178309277577319::1658778572::0::1::::<><>::uid://lr0avb7g5g61
-Material_001.material::StandardMaterial3D::-1::1616974859::0::1::::<><>::
-meshMat.tres::StandardMaterial3D::8096495644725958753::1649483677::0::1::::<><>::
-::res://assets/Scenes/::1692094996
-Bullet_Hole.tscn::PackedScene::8538317011884883153::1659074560::0::1::::<><>::uid://coyags3onmbtx<>res://assets/Scripts/BulletHole.gd
-Enemy.tscn::PackedScene::8774705623518411679::1692094996::0::1::::<><>::res://assets/Scripts/Enemy.gd<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres
-Grenade.tscn::PackedScene::9101940557645300414::1674087511::0::1::::<><>::res://assets/Scripts/Grenade.gd
-Modular Level.tscn::PackedScene::6557267898328637118::1692094996::0::1::::<><>::uid://dcd5tvfbfl2yq::::res://assets/3D Models/Modular Level/Cube.tscn<>res://assets/Scripts/World.gd<>uid://dxasecjq6pvt4::::res://assets/Scenes/Enemy.tscn<>uid://ctkitjg74vkyt::::res://assets/Scenes/Player.tscn<>res://assets/Scripts/AStar2.gd<>res://assets/Scripts/GameManager.gd
-Player.tscn::PackedScene::6127593323548242787::1692094996::0::1::::<><>::res://assets/Scripts/UI.gd<>res://assets/Scripts/Player.gd<>res://assets/Scripts/MinimapCamera.gd<>uid://cm1q76mk4007h::::res://assets/Images/Point.png<>uid://c5moywth3hql::::res://assets/Images/Crosshair_2.png<>uid://bauiufvbddmkm::::res://assets/Images/Loading.png<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres<>uid://grh1xucp1ryp::::res://assets/3D Models/awp.tscn<>uid://cdafydtc3mp4r::::res://assets/3D Models/Pistol.tscn<>uid://cw7ephsb1veb1::::res://assets/3D Models/M16.tscn
-::res://assets/Scripts/::1692059698
-AStar2.gd::GDScript::-1::1691794652::0::1::::AStar2<>Node<>::
-AStar.gd::GDScript::-1::1691792012::0::1::::AStar<>Node<>::
-AStar_Cell.gd::GDScript::-1::1691750976::0::1::::AStar_Cell<>Node<>::
-BulletHole.gd::GDScript::-1::1656293614::0::1::::<>Node<>::
-Car.gd::GDScript::-1::1657216621::0::1::::<>VehicleBody3D<>::
-Enemy.gd::GDScript::-1::1692059698::0::1::::<>CharacterBody3D<>::
-GameManager.gd::GDScript::-1::1656159721::0::1::::<>Node3D<>::
-Grenade.gd::GDScript::-1::1691729729::0::1::::<>RigidBody3D<>::
-LightBox.gd::GDScript::-1::1674055578::0::1::::<>RigidBody3D<>::
-MinimapCamera.gd::GDScript::-1::1656867913::0::1::::<>Camera3D<>::
-Pistol1.gd::GDScript::-1::1676008786::0::1::::<>Weapon<>::
-Player.gd::GDScript::-1::1691728203::0::1::::<>CharacterBody3D<>::
-Rifle1.gd::GDScript::-1::1691613314::0::1::::<>Weapon<>::
-Sniper1.gd::GDScript::-1::1676008766::0::1::::<>Weapon<>::
-UI.gd::GDScript::-1::1691724891::0::1::::<>Control<>::
-Weapon.gd::GDScript::-1::1691078742::0::1::::Weapon<>Node3D<>::
-World.gd::GDScript::-1::1676106286::0::1::::<>Node3D<>::
-::res://assets/Sounds/::1676093844
-pistol_sound.wav::AudioStreamWAV::1985509206467886789::1659218568::1676093844::1::::<><>::
-running.wav::AudioStreamWAV::4543536972482644189::1659081467::1676093844::1::::<><>::
-walking.wav::AudioStreamWAV::107506926831094888::1659080263::1676093844::1::::<><>::
-::res://assets/Textures/::1676093844
-bullet hole.png::CompressedTexture2D::5805041948508287505::1650039719::1676093844::1::::<><>::
+::res://::1715375297
+export_presets.cfg::TextFile::-1::1695769343::0::1::::<><>::
+::res://assets/::1715000396
+environment.tres::Environment::7378468779249063764::1715000396::0::1::::<><>::
+favicon.png::CompressedTexture2D::5277229873534546316::1692644169::1692644169::1::::<><>::
+icon.png::CompressedTexture2D::1704303669891223044::1692644169::1692644169::1::::<><>::
+SIL Open Font License.txt::TextFile::-1::1708665546::0::1::::<><>::
+::res://assets/3D Models/::1715000396
+AWP.gltf::PackedScene::2501186785940650402::1692644169::1701423781::1::::<><>::
+awp.tscn::PackedScene::456700172283202947::1715000396::0::1::::<><>::uid://bbvugffr6w66i::::res://assets/3D Models/AWP.gltf<>res://assets/Scripts/Sniper1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+M16.gltf::PackedScene::6379740526962361478::1692644169::1701423781::1::::<><>::
+M16.tscn::PackedScene::6383326065983407412::1715000396::0::1::::<><>::uid://cw5nnn5873ida::::res://assets/3D Models/M16.gltf<>res://assets/Scripts/Rifle1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+Pistol.gltf::PackedScene::3189297400211626546::1692644169::1701423781::1::::<><>::
+Pistol.tscn::PackedScene::4983754529367961671::1715000396::0::1::::<><>::uid://blo6i6ejdip8e::::res://assets/3D Models/Pistol.gltf<>res://assets/Scripts/Pistol1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+Sword.glb::PackedScene::1417871205743260880::1712096683::1712096716::1::::<><>::
+Sword.tscn::PackedScene::201088096080775932::1715000396::0::1::::<><>::uid://ug3eqeurxuuq::::res://assets/3D Models/Sword.glb
+::res://assets/3D Models/Modular Level/::1692644169
+Cube.tscn::PackedScene::7307689422251690804::1692644169::0::1::::<><>::
+::res://assets/Images/::1692644169
+Crosshair.png::CompressedTexture2D::563015519890804597::1692644169::1692644169::1::::<><>::
+Crosshair_2.png::CompressedTexture2D::203063920345561335::1692644169::1692644169::1::::<><>::
+Crosshair_3.png::CompressedTexture2D::3866435617754723251::1692644169::1692644169::1::::<><>::
+health1.png::CompressedTexture2D::7357493686492304805::1692644169::1692644169::1::::<><>::
+health_over.png::CompressedTexture2D::4040400393259764681::1692644169::1692644169::1::::<><>::
+health_under.png::CompressedTexture2D::2864330534062665377::1692644169::1692644169::1::::<><>::
+Loading.png::CompressedTexture2D::2428229985701746232::1692644169::1692644169::1::::<><>::
+Point.png::CompressedTexture2D::5669811577192993027::1692644169::1692644169::1::::<><>::
+Point_2.png::CompressedTexture2D::5428234446817036079::1692644169::1692644169::1::::<><>::
+::res://assets/Materials/::1692644169
+emissionMat.tres::StandardMaterial3D::-1::1692644169::0::1::::<><>::
+green.tres::StandardMaterial3D::3397369558562987285::1692644169::0::1::::<><>::
+grid.material::StandardMaterial3D::3802178309277577319::1692644169::0::1::::<><>::uid://lr0avb7g5g61::::res://assets/Textures/grid.png
+Material_001.material::StandardMaterial3D::-1::1692644169::0::1::::<><>::
+meshMat.tres::StandardMaterial3D::8096495644725958753::1692644169::0::1::::<><>::
+::res://assets/Scenes/::1715000396
+Bullet_Hole.tscn::PackedScene::8538317011884883153::1701423779::0::1::::<><>::uid://coyags3onmbtx::::res://assets/Textures/bullet hole.png<>res://assets/Scripts/BulletHole.gd
+Enemy.tscn::PackedScene::8774705623518411679::1715000396::0::1::::<><>::res://assets/Scripts/Enemy.gd<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres
+Grenade.tscn::PackedScene::9101940557645300414::1701423779::0::1::::<><>::res://assets/Scripts/Grenade.gd
+Modular Level.tscn::PackedScene::6557267898328637118::1715000395::0::1::::<><>::uid://dcd5tvfbfl2yq::::res://assets/3D Models/Modular Level/Cube.tscn<>res://assets/Scripts/World.gd<>uid://dxasecjq6pvt4::::res://assets/Scenes/Enemy.tscn<>uid://ctkitjg74vkyt::::res://assets/Scenes/Player.tscn<>res://assets/Scripts/AStar2.gd<>res://assets/Scripts/GameManager.gd
+Player.tscn::PackedScene::6127593323548242787::1715000395::0::1::::<><>::res://assets/Scripts/UI.gd<>res://assets/Scripts/Player.gd<>res://assets/Scripts/MinimapCamera.gd<>uid://cm1q76mk4007h::::res://assets/Images/Point.png<>uid://c5moywth3hql::::res://assets/Images/Crosshair_2.png<>uid://bauiufvbddmkm::::res://assets/Images/Loading.png<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres<>uid://grh1xucp1ryp::::res://assets/3D Models/awp.tscn<>uid://cdafydtc3mp4r::::res://assets/3D Models/Pistol.tscn<>uid://cw7ephsb1veb1::::res://assets/3D Models/M16.tscn<>uid://c4n5kv85alxc::::res://assets/3D Models/Sword.tscn
+::res://assets/Scripts/::1692644169
+AStar2.gd::GDScript::-1::1692644169::0::1::::AStar2<>Node<>::
+AStar.gd::GDScript::-1::1692644169::0::1::::AStar<>Node<>::
+AStar_Cell.gd::GDScript::-1::1692644169::0::1::::AStar_Cell<>Node<>::
+BulletHole.gd::GDScript::-1::1692644169::0::1::::<>Node<>::
+Car.gd::GDScript::-1::1692644169::0::1::::<>VehicleBody3D<>::
+Enemy.gd::GDScript::-1::1692644169::0::1::::<>CharacterBody3D<>::
+GameManager.gd::GDScript::-1::1692644169::0::1::::<>Node3D<>::
+Grenade.gd::GDScript::-1::1692644169::0::1::::<>RigidBody3D<>::
+LightBox.gd::GDScript::-1::1692644169::0::1::::<>RigidBody3D<>::
+MinimapCamera.gd::GDScript::-1::1692644169::0::1::::<>Camera3D<>::
+Pistol1.gd::GDScript::-1::1692644169::0::1::::<>Weapon<>::
+Player.gd::GDScript::-1::1692644169::0::1::::<>CharacterBody3D<>::
+Rifle1.gd::GDScript::-1::1692644169::0::1::::<>Weapon<>::
+Sniper1.gd::GDScript::-1::1692644169::0::1::::<>Weapon<>::
+UI.gd::GDScript::-1::1692644169::0::1::::<>Control<>::
+Weapon.gd::GDScript::-1::1692644169::0::1::::Weapon<>Node3D<>::
+World.gd::GDScript::-1::1692644169::0::1::::<>Node3D<>::
+::res://assets/Sounds/::1692644169
+pistol_sound.wav::AudioStreamWAV::1985509206467886789::1692644169::1692644169::1::::<><>::
+running.wav::AudioStreamWAV::4543536972482644189::1692644169::1692644169::1::::<><>::
+walking.wav::AudioStreamWAV::107506926831094888::1692644169::1692644169::1::::<><>::
+::res://assets/Textures/::1692644169
+bullet hole.png::CompressedTexture2D::5805041948508287505::1692644169::1692644169::1::::<><>::

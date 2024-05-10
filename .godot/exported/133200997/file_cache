@@ -1,0 +1,12 @@
+res://assets/3D Models/awp.tscn::c6af8f774170aaa6d94fdc97ba57ef47::1695421116::res://.godot/exported/133200997/export-96aa4e2938ca9ed535b49158b98252f2-awp.scn
+res://assets/3D Models/M16.tscn::00ec41e6ec600a049915b30e4ad3187a::1695421116::res://.godot/exported/133200997/export-29aab9a6cc19398defd39389b97d3d14-M16.scn
+res://assets/3D Models/Pistol.tscn::5dc0c1cc68a68e34ff3181ca9c58e72a::1695421116::res://.godot/exported/133200997/export-afe6bfa1e392f46cad97029e8fc5ac9a-Pistol.scn
+res://assets/Materials/emissionMat.tres::655aa42b90eea05bcc49df20d33d5cb3::1692644169::res://.godot/exported/133200997/export-e4af16bb4faec54537266390dcfcda02-emissionMat.res
+res://assets/Materials/green.tres::7bfa9570a11e34e62402af880c9ec2d6::1692644169::res://.godot/exported/133200997/export-f443756db06df195dcaff7cc3eb86a48-green.res
+res://assets/Materials/meshMat.tres::c5fa48da03a03935a958adcdbc4cb34b::1692644169::res://.godot/exported/133200997/export-dd32a76d45751586d544381488abdf0b-meshMat.res
+res://assets/Scenes/Bullet_Hole.tscn::b87ac6fe99c9fa4d3d28944bcb5a65a5::1692644169::res://.godot/exported/133200997/export-0b61b3a05d022ce9043f3c722c6eac83-Bullet_Hole.scn
+res://assets/Scenes/Enemy.tscn::b610d891f8e214e4c2da23bf68c6c0f4::1695421116::res://.godot/exported/133200997/export-d54a1920557983449c895c7b4c0e5369-Enemy.scn
+res://assets/Scenes/Grenade.tscn::8374e41aea39b618ba919a3d786f58a6::1692644169::res://.godot/exported/133200997/export-4a3a7f2bb252ec451bf960d1c56d6866-Grenade.scn
+res://assets/Scenes/Modular Level.tscn::80779697bf32faf32889ca5959018167::1695421116::res://.godot/exported/133200997/export-6144d805a57fa9f5fff78e65a1d4942d-Modular Level.scn
+res://assets/Scenes/Player.tscn::aca753521678d899925d81d6f0d200f7::1695421116::res://.godot/exported/133200997/export-661198017cdc41f4fad03574e3d875f0-Player.scn
+res://assets/environment.tres::1774a4753f28d66657c2296b9b2391b5::1695421116::res://.godot/exported/133200997/export-55cb0503692521ce9cd0fcbe7b9a107e-environment.res

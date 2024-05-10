@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctkitjg74vkyt"]
+[gd_scene load_steps=18 format=3 uid="uid://ctkitjg74vkyt"]
 
 [ext_resource type="Script" path="res://assets/Scripts/UI.gd" id="1"]
 [ext_resource type="Script" path="res://assets/Scripts/Player.gd" id="3"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://grh1xucp1ryp" path="res://assets/3D Models/awp.tscn" id="8_71jvt"]
 [ext_resource type="PackedScene" uid="uid://cdafydtc3mp4r" path="res://assets/3D Models/Pistol.tscn" id="9_o3wni"]
 [ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="11_hsj3n"]
+[ext_resource type="PackedScene" uid="uid://c4n5kv85alxc" path="res://assets/3D Models/Sword.tscn" id="11_qyala"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.9
@@ -272,6 +273,11 @@ visible = false
 
 [node name="SecondWeapon" parent="Head/Camera" instance=ExtResource("11_hsj3n")]
 transform = Transform3D(-0.0453303, 0, -0.194795, 0, 0.2, 0, 0.194795, 0, -0.0453303, 0.377, -0.267, -0.755)
+visible = false
+
+[node name="Sword2" parent="Head/Camera" instance=ExtResource("11_qyala")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.233773, -0.497825, -0.746326)
+visible = false
 
 [node name="CollisionDetectionArea" type="Area3D" parent="."]
 

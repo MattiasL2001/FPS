@@ -46,9 +46,9 @@ layers = 2
 [node name="glass_2" parent="." index="13"]
 layers = 2
 
-[node name="Cube" parent="." index="14"]
-layers = 2
-
 [node name="Audio" type="AudioStreamPlayer3D" parent="." index="15"]
 stream = ExtResource("2_wllpa")
 pitch_scale = 0.8
+
+[node name="Cube" parent="." index="17"]
+layers = 2
