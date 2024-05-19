@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0onikmi7ex3k"]
+[gd_scene load_steps=9 format=3 uid="uid://c0onikmi7ex3k"]
 
 [ext_resource type="PackedScene" uid="uid://dcd5tvfbfl2yq" path="res://assets/3D Models/Modular Level/Cube.tscn" id="1_85xg3"]
 [ext_resource type="Script" path="res://assets/Scripts/World.gd" id="1_g6a31"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ctkitjg74vkyt" path="res://assets/Scenes/Player.tscn" id="4_wbq2j"]
 [ext_resource type="Script" path="res://assets/Scripts/AStar2.gd" id="5_2w2px"]
 [ext_resource type="Script" path="res://assets/Scripts/GameManager.gd" id="5_isdxn"]
+[ext_resource type="Script" path="res://assets/Scripts/LightBox.gd" id="7_dxt8u"]
+[ext_resource type="PackedScene" uid="uid://cdkqh47aw8jao" path="res://assets/3D Models/chest.tscn" id="8_1aveo"]
 
 [node name="Level" type="Node3D" groups=["Level"]]
 script = ExtResource("1_g6a31")
@@ -38,3 +40,10 @@ size = 30.0
 [node name="Cube" parent="Level_Design" instance=ExtResource("1_85xg3")]
 transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
 skeleton = NodePath("../..")
+
+[node name="Cube2" parent="Level_Design" instance=ExtResource("1_85xg3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.55, 4)
+script = ExtResource("7_dxt8u")
+
+[node name="Chest" parent="." instance=ExtResource("8_1aveo")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -8, 0.55, 4)

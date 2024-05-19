@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctkitjg74vkyt"]
+[gd_scene load_steps=17 format=3 uid="uid://ctkitjg74vkyt"]
 
 [ext_resource type="Script" path="res://assets/Scripts/UI.gd" id="1"]
 [ext_resource type="Script" path="res://assets/Scripts/Player.gd" id="3"]
@@ -7,10 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c5moywth3hql" path="res://assets/Images/Crosshair_2.png" id="5_ynnmn"]
 [ext_resource type="Texture2D" uid="uid://bauiufvbddmkm" path="res://assets/Images/Loading.png" id="7_1dl7g"]
 [ext_resource type="Material" uid="uid://dnmadoandf442" path="res://assets/Materials/meshMat.tres" id="8"]
-[ext_resource type="PackedScene" uid="uid://grh1xucp1ryp" path="res://assets/3D Models/awp.tscn" id="8_71jvt"]
+[ext_resource type="PackedScene" uid="uid://byou4g1e2yeni" path="res://assets/3D Models/awp.tscn" id="8_71jvt"]
 [ext_resource type="PackedScene" uid="uid://cdafydtc3mp4r" path="res://assets/3D Models/Pistol.tscn" id="9_o3wni"]
 [ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="11_hsj3n"]
-[ext_resource type="PackedScene" uid="uid://c4n5kv85alxc" path="res://assets/3D Models/Sword.tscn" id="11_qyala"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.9
@@ -74,6 +73,7 @@ script = ExtResource("1")
 layout_mode = 0
 offset_right = 39.0
 offset_bottom = 26.0
+theme_override_font_sizes/font_size = 36
 text = "hello"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -100,6 +100,7 @@ offset_right = 70.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 36
 text = "press E to interact"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -107,8 +108,9 @@ vertical_alignment = 1
 [node name="FPS_text" type="Label" parent="Head/Camera/UI"]
 layout_mode = 0
 offset_top = 30.0
-offset_right = 32.0
-offset_bottom = 56.0
+offset_right = 71.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 36
 text = "FPS:"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -127,11 +129,12 @@ metadata/_edit_layout_mode = 1
 
 [node name="ammo_text" type="Label" parent="Head/Camera/UI"]
 layout_mode = 0
-offset_left = 1861.0
-offset_top = 1050.0
+offset_left = 1825.0
+offset_top = 1025.0
 offset_right = 1900.0
-offset_bottom = 1076.0
-text = "hello"
+offset_bottom = 1059.0
+theme_override_font_sizes/font_size = 24
+text = "ammo"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_layout_mode = 1
@@ -139,10 +142,11 @@ metadata/_edit_layout_mode = 1
 [node name="health_text" type="Label" parent="Head/Camera/UI"]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 1050.0
-offset_right = 70.0
-offset_bottom = 1080.0
-text = "hello"
+offset_top = 1025.0
+offset_right = 94.0
+offset_bottom = 1059.0
+theme_override_font_sizes/font_size = 24
+text = "health"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_layout_mode = 1
@@ -273,10 +277,6 @@ visible = false
 
 [node name="SecondWeapon" parent="Head/Camera" instance=ExtResource("11_hsj3n")]
 transform = Transform3D(-0.0453303, 0, -0.194795, 0, 0.2, 0, 0.194795, 0, -0.0453303, 0.377, -0.267, -0.755)
-visible = false
-
-[node name="Sword2" parent="Head/Camera" instance=ExtResource("11_qyala")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.233773, -0.497825, -0.746326)
 visible = false
 
 [node name="CollisionDetectionArea" type="Area3D" parent="."]

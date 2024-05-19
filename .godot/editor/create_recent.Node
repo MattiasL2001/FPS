@@ -1,8 +1,8 @@
+CollisionShape3D
+StaticBody3D
 AudioStreamPlayer3D
 NavigationAgent3D
 NavigationRegion3D
-CollisionShape3D
-StaticBody3D
 MeshInstance3D
 AnimationPlayer
 AnimatedSprite2D
@@ -12,7 +12,3 @@ Control
 Container
 Camera3D
 MarginContainer
-CenterContainer
-Panel
-PanelContainer
-DirectionalLight3D

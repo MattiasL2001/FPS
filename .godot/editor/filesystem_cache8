@@ -1,22 +1,30 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1715375297
+::res://::1716140335
 export_presets.cfg::TextFile::-1::1695769343::0::1::::<><>::
-::res://assets/::1715000396
-environment.tres::Environment::7378468779249063764::1715000396::0::1::::<><>::
+::res://assets/::1716135140
+environment.tres::Environment::7378468779249063764::1716135140::0::1::::<><>::
 favicon.png::CompressedTexture2D::5277229873534546316::1692644169::1692644169::1::::<><>::
 icon.png::CompressedTexture2D::1704303669891223044::1692644169::1692644169::1::::<><>::
 SIL Open Font License.txt::TextFile::-1::1708665546::0::1::::<><>::
-::res://assets/3D Models/::1715000396
-AWP.gltf::PackedScene::2501186785940650402::1692644169::1701423781::1::::<><>::
-awp.tscn::PackedScene::456700172283202947::1715000396::0::1::::<><>::uid://bbvugffr6w66i::::res://assets/3D Models/AWP.gltf<>res://assets/Scripts/Sniper1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+::res://assets/3D Models/::1716140351
+AWP7_3_awp_body.png::CompressedTexture2D::2910696562414332341::1716124622::1716124623::1::::<><>::
+AWP.glb::PackedScene::6614120076132549869::1716122667::1716124755::1::::<><>::uid://cdv8vq4b3e7vi::::res://assets/3D Models/AWP_awp_body.png
+AWP.gltf::PackedScene::1490714296685917856::1692644169::1716140336::1::::<><>::
+awp.tscn::PackedScene::456700172283202947::1716124402::0::1::::<><>::uid://bbvugffr6w66i::::res://assets/3D Models/AWP.gltf<>res://assets/Scripts/Sniper1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+AWP_awp_body.png::CompressedTexture2D::5028801878824828818::1716124755::1716124755::1::::<><>::
+Chest.glb::PackedScene::2629311280961995981::1716140144::1716140354::1::::<><>::uid://dwj1foji7jyub::::res://assets/3D Models/Chest_Base.png<>uid://bdrpgahb7l1gg::::res://assets/3D Models/Chest_Top.png<>uid://hdbbioakgx5l::::res://assets/3D Models/Chest_Lock.png<>uid://cha4h4yjk8uuq::::res://assets/3D Models/Chest_Steel.png
 M16.gltf::PackedScene::6379740526962361478::1692644169::1701423781::1::::<><>::
-M16.tscn::PackedScene::6383326065983407412::1715000396::0::1::::<><>::uid://cw5nnn5873ida::::res://assets/3D Models/M16.gltf<>res://assets/Scripts/Rifle1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+M16.tscn::PackedScene::6383326065983407412::1716125530::0::1::::<><>::uid://cw5nnn5873ida::::res://assets/3D Models/M16.gltf<>res://assets/Scripts/Rifle1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
 Pistol.gltf::PackedScene::3189297400211626546::1692644169::1701423781::1::::<><>::
-Pistol.tscn::PackedScene::4983754529367961671::1715000396::0::1::::<><>::uid://blo6i6ejdip8e::::res://assets/3D Models/Pistol.gltf<>res://assets/Scripts/Pistol1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
-Sword.glb::PackedScene::1417871205743260880::1712096683::1712096716::1::::<><>::
-Sword.tscn::PackedScene::201088096080775932::1715000396::0::1::::<><>::uid://ug3eqeurxuuq::::res://assets/3D Models/Sword.glb
-::res://assets/3D Models/Modular Level/::1692644169
-Cube.tscn::PackedScene::7307689422251690804::1692644169::0::1::::<><>::
+Pistol.tscn::PackedScene::4983754529367961671::1716125482::0::1::::<><>::uid://blo6i6ejdip8e::::res://assets/3D Models/Pistol.gltf<>res://assets/Scripts/Pistol1.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+Chest_Base.png::CompressedTexture2D::8723584331320776209::1716140353::1716140354::1::::<><>::
+Chest_Top.png::CompressedTexture2D::2633003116983432434::1716140353::1716140354::1::::<><>::
+Chest_Lock.png::CompressedTexture2D::497577983342767155::1716140353::1716140354::1::::<><>::
+Chest_Steel.png::CompressedTexture2D::5265938126876053712::1716140354::1716140354::1::::<><>::
+Sword.glb::PackedScene::9011608331248820261::1712096683::1716140336::1::::<><>::
+Sword.tscn::PackedScene::201088096080775932::1716074091::0::1::::<><>::uid://ug3eqeurxuuq::::res://assets/3D Models/Sword.glb
+::res://assets/3D Models/Modular Level/::1716125482
+Cube.tscn::PackedScene::7307689422251690804::1716125482::0::1::::<><>::
 ::res://assets/Images/::1692644169
 Crosshair.png::CompressedTexture2D::563015519890804597::1692644169::1692644169::1::::<><>::
 Crosshair_2.png::CompressedTexture2D::203063920345561335::1692644169::1692644169::1::::<><>::
@@ -33,22 +41,21 @@ green.tres::StandardMaterial3D::3397369558562987285::1692644169::0::1::::<><>::
 grid.material::StandardMaterial3D::3802178309277577319::1692644169::0::1::::<><>::uid://lr0avb7g5g61::::res://assets/Textures/grid.png
 Material_001.material::StandardMaterial3D::-1::1692644169::0::1::::<><>::
 meshMat.tres::StandardMaterial3D::8096495644725958753::1692644169::0::1::::<><>::
-::res://assets/Scenes/::1715000396
+::res://assets/Scenes/::1716135140
 Bullet_Hole.tscn::PackedScene::8538317011884883153::1701423779::0::1::::<><>::uid://coyags3onmbtx::::res://assets/Textures/bullet hole.png<>res://assets/Scripts/BulletHole.gd
-Enemy.tscn::PackedScene::8774705623518411679::1715000396::0::1::::<><>::res://assets/Scripts/Enemy.gd<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres
-Grenade.tscn::PackedScene::9101940557645300414::1701423779::0::1::::<><>::res://assets/Scripts/Grenade.gd
-Modular Level.tscn::PackedScene::6557267898328637118::1715000395::0::1::::<><>::uid://dcd5tvfbfl2yq::::res://assets/3D Models/Modular Level/Cube.tscn<>res://assets/Scripts/World.gd<>uid://dxasecjq6pvt4::::res://assets/Scenes/Enemy.tscn<>uid://ctkitjg74vkyt::::res://assets/Scenes/Player.tscn<>res://assets/Scripts/AStar2.gd<>res://assets/Scripts/GameManager.gd
-Player.tscn::PackedScene::6127593323548242787::1715000395::0::1::::<><>::res://assets/Scripts/UI.gd<>res://assets/Scripts/Player.gd<>res://assets/Scripts/MinimapCamera.gd<>uid://cm1q76mk4007h::::res://assets/Images/Point.png<>uid://c5moywth3hql::::res://assets/Images/Crosshair_2.png<>uid://bauiufvbddmkm::::res://assets/Images/Loading.png<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres<>uid://grh1xucp1ryp::::res://assets/3D Models/awp.tscn<>uid://cdafydtc3mp4r::::res://assets/3D Models/Pistol.tscn<>uid://cw7ephsb1veb1::::res://assets/3D Models/M16.tscn<>uid://c4n5kv85alxc::::res://assets/3D Models/Sword.tscn
-::res://assets/Scripts/::1692644169
+Enemy.tscn::PackedScene::8774705623518411679::1716125482::0::1::::<><>::res://assets/Scripts/Enemy.gd<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres
+Grenade.tscn::PackedScene::9101940557645300414::1716125482::0::1::::<><>::res://assets/Scripts/Grenade.gd<>uid://3j2bt2monwoj::::res://assets/Sounds/pistol_sound.wav
+Modular Level.tscn::PackedScene::6557267898328637118::1716125540::0::1::::<><>::uid://dcd5tvfbfl2yq::::res://assets/3D Models/Modular Level/Cube.tscn<>res://assets/Scripts/World.gd<>uid://dxasecjq6pvt4::::res://assets/Scenes/Enemy.tscn<>uid://ctkitjg74vkyt::::res://assets/Scenes/Player.tscn<>res://assets/Scripts/AStar2.gd<>res://assets/Scripts/GameManager.gd<>res://assets/Scripts/LightBox.gd
+Player.tscn::PackedScene::6127593323548242787::1716135140::0::1::::<><>::res://assets/Scripts/UI.gd<>res://assets/Scripts/Player.gd<>res://assets/Scripts/MinimapCamera.gd<>uid://cm1q76mk4007h::::res://assets/Images/Point.png<>uid://c5moywth3hql::::res://assets/Images/Crosshair_2.png<>uid://bauiufvbddmkm::::res://assets/Images/Loading.png<>uid://dnmadoandf442::::res://assets/Materials/meshMat.tres<>uid://csbw4qpbmhvcl::::res://assets/3D Models/awp.tscn<>uid://cdafydtc3mp4r::::res://assets/3D Models/Pistol.tscn<>uid://cw7ephsb1veb1::::res://assets/3D Models/M16.tscn
+::res://assets/Scripts/::1716125448
 AStar2.gd::GDScript::-1::1692644169::0::1::::AStar2<>Node<>::
 AStar.gd::GDScript::-1::1692644169::0::1::::AStar<>Node<>::
 AStar_Cell.gd::GDScript::-1::1692644169::0::1::::AStar_Cell<>Node<>::
 BulletHole.gd::GDScript::-1::1692644169::0::1::::<>Node<>::
-Car.gd::GDScript::-1::1692644169::0::1::::<>VehicleBody3D<>::
 Enemy.gd::GDScript::-1::1692644169::0::1::::<>CharacterBody3D<>::
 GameManager.gd::GDScript::-1::1692644169::0::1::::<>Node3D<>::
-Grenade.gd::GDScript::-1::1692644169::0::1::::<>RigidBody3D<>::
-LightBox.gd::GDScript::-1::1692644169::0::1::::<>RigidBody3D<>::
+Grenade.gd::GDScript::-1::1716125448::0::1::::<>RigidBody3D<>::
+LightBox.gd::GDScript::-1::1716125260::0::1::::<>MeshInstance3D<>::
 MinimapCamera.gd::GDScript::-1::1692644169::0::1::::<>Camera3D<>::
 Pistol1.gd::GDScript::-1::1692644169::0::1::::<>Weapon<>::
 Player.gd::GDScript::-1::1692644169::0::1::::<>CharacterBody3D<>::

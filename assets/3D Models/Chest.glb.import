@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bbvugffr6w66i"
-path="res://.godot/imported/AWP.gltf-3b17a7ca8dbbe54b0d774d03f29b8530.scn"
+uid="uid://bdpwmw1v7qxcn"
+path="res://.godot/imported/Chest.glb-ab363b41dfed1ef3d2e3cca11e8f754a.scn"
 
 [deps]
 
-source_file="res://assets/3D Models/AWP.gltf"
-dest_files=["res://.godot/imported/AWP.gltf-3b17a7ca8dbbe54b0d774d03f29b8530.scn"]
+source_file="res://assets/3D Models/Chest.glb"
+dest_files=["res://.godot/imported/Chest.glb-ab363b41dfed1ef3d2e3cca11e8f754a.scn"]
 
 [params]
 
@@ -29,18 +29,6 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={
-"nodes": {
-"PATH:light": {
-"import/skip_import": true
-},
-"PATH:light001": {
-"import/skip_import": true
-},
-"PATH:light002": {
-"import/skip_import": true
-}
-}
-}
-gltf/naming_version=0
+_subresources={}
+gltf/naming_version=1
 gltf/embedded_image_handling=1
