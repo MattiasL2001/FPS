@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw7ephsb1veb1"]
+
+[ext_resource type="PackedScene" uid="uid://cw5nnn5873ida" path="res://assets/3D Models/M16.gltf" id="1_mcv1a"]
+[ext_resource type="Script" uid="uid://ca5yo6ijflrpo" path="res://assets/Scripts/Rifle1.gd" id="2_hpd62"]
+[ext_resource type="AudioStream" uid="uid://3j2bt2monwoj" path="res://assets/Sounds/pistol_sound.wav" id="3_nv2r2"]
+[ext_resource type="Material" path="res://assets/Materials/Material_001.material" id="3_pcues"]
+
+[node name="M16" instance=ExtResource("1_mcv1a")]
+script = ExtResource("2_hpd62")
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("3_pcues")
+
+[node name="Magazine" parent="." index="1"]
+material_override = ExtResource("3_pcues")
+
+[node name="FrontSights" parent="." index="2"]
+material_override = ExtResource("3_pcues")
+
+[node name="BarrelCover" parent="." index="3"]
+material_override = ExtResource("3_pcues")
+
+[node name="Barrel" parent="." index="4"]
+transform = Transform3D(4.99415e-08, 0.159092, 0, -0.159092, 4.99415e-08, 0, 0, 0, 0.140174, 1.25268, 0.476264, 0.066813)
+material_override = ExtResource("3_pcues")
+
+[node name="Rear_Sights" parent="." index="5"]
+material_override = ExtResource("3_pcues")
+
+[node name="Stock" parent="." index="6"]
+material_override = ExtResource("3_pcues")
+
+[node name="Reciever" parent="." index="7"]
+material_override = ExtResource("3_pcues")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="." index="8"]
+stream = ExtResource("3_nv2r2")
+pitch_scale = 1.5

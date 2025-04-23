@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2xbvpvw5egiw"]
+
+[ext_resource type="Script" uid="uid://be7sh37kacpf3" path="res://assets/Scripts/Grenade.gd" id="1_hy0iw"]
+[ext_resource type="AudioStream" uid="uid://3j2bt2monwoj" path="res://assets/Sounds/pistol_sound.wav" id="2_ofien"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qe3nv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5mqln"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bbgo8"]
+radius = 5.0
+
+[node name="Grenade" type="RigidBody3D"]
+freeze = true
+script = ExtResource("1_hy0iw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("SphereShape3D_qe3nv")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("SphereMesh_5mqln")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_bbgo8")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_ofien")
+pitch_scale = 0.3

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtwa3l1u0k6k8"]
+
+[ext_resource type="Texture2D" uid="uid://coyags3onmbtx" path="res://assets/Textures/bullet hole.png" id="1_fi0i5"]
+[ext_resource type="Script" uid="uid://ci5syetcyhrwi" path="res://assets/Scripts/BulletHole.gd" id="1_qsr6a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vuw5"]
+transparency = 1
+albedo_texture = ExtResource("1_fi0i5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tu3mb"]
+material = SubResource("StandardMaterial3D_3vuw5")
+size = Vector2(0.02, 0.02)
+
+[node name="Bullet_Hole" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, -0.02, 0)
+script = ExtResource("1_qsr6a")
+time = 30.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.02)
+mesh = SubResource("QuadMesh_tu3mb")

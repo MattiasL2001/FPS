@@ -1,0 +1,29 @@
+# Godot-specific
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot 4 generated files
+.godot/
+*.godot/tmp/
+
+# OS/system crap
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor/user-specific
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# IDE configs
+.vscode/
+.idea/
+
+# Build/artifacts (om du råkar lägga dem i projektet)
+*.exe
+*.pck
+*.zip

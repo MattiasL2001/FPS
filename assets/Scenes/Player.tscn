@@ -1,0 +1,293 @@
+[gd_scene load_steps=18 format=3 uid="uid://ctkitjg74vkyt"]
+
+[ext_resource type="Script" uid="uid://ck24t1f3wht57" path="res://assets/Scripts/UI.gd" id="1"]
+[ext_resource type="Script" uid="uid://dujkjvxctucc4" path="res://assets/Scripts/Player.gd" id="3"]
+[ext_resource type="Script" uid="uid://lh7nfgo1nv1s" path="res://assets/Scripts/MinimapCamera.gd" id="4"]
+[ext_resource type="Script" uid="uid://ftvojs1vsvya" path="res://assets/Scripts/Crosshair.gd" id="5_bb13o"]
+[ext_resource type="Texture2D" uid="uid://bauiufvbddmkm" path="res://assets/Images/Loading.png" id="7_1dl7g"]
+[ext_resource type="Texture2D" uid="uid://que1pl57pmwe" path="res://assets/Images/sniper.png" id="7_bb13o"]
+[ext_resource type="Script" uid="uid://c3nwxofvs40td" path="res://assets/Scripts/HandController.gd" id="7_vcdtb"]
+[ext_resource type="Material" uid="uid://dnmadoandf442" path="res://assets/Materials/meshMat.tres" id="8"]
+[ext_resource type="PackedScene" uid="uid://byou4g1e2yeni" path="res://assets/3D Models/awp.tscn" id="8_71jvt"]
+[ext_resource type="PackedScene" uid="uid://cdafydtc3mp4r" path="res://assets/3D Models/Pistol.tscn" id="9_o3wni"]
+[ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="11_hsj3n"]
+
+[sub_resource type="CapsuleShape3D" id="1"]
+height = 1.9
+
+[sub_resource type="CapsuleMesh" id="2"]
+material = ExtResource("8")
+height = 1.9
+
+[sub_resource type="LabelSettings" id="LabelSettings_n84x6"]
+font_size = 20
+
+[sub_resource type="Animation" id="Animation_1dcnt"]
+resource_name = "Reloading"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0smit"]
+_data = {
+&"Reloading": SubResource("Animation_1dcnt")
+}
+
+[sub_resource type="CapsuleShape3D" id="6"]
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("3")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="CollisionShape"]
+layers = 2
+mesh = SubResource("2")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.2)
+
+[node name="Camera" type="Camera3D" parent="Head"]
+current = true
+
+[node name="RayCastShooting" type="RayCast3D" parent="Head/Camera"]
+
+[node name="RayCastInteraction" type="RayCast3D" parent="Head/Camera"]
+
+[node name="UI" type="Control" parent="Head/Camera"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="speed_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_right = 39.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 36
+text = "hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hotbar_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_top = 500.0
+offset_right = 1920.0
+offset_bottom = 1580.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_layout_mode = 1
+
+[node name="interact_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -13.0
+offset_right = 70.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "press E to interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FPS_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 71.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 36
+text = "FPS:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="coords_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 900.0
+offset_right = 1000.0
+offset_bottom = 926.0
+text = "hello"
+label_settings = SubResource("LabelSettings_n84x6")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_layout_mode = 1
+
+[node name="ammo_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_left = 1825.0
+offset_top = 1025.0
+offset_right = 1900.0
+offset_bottom = 1059.0
+theme_override_font_sizes/font_size = 24
+text = "ammo"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_layout_mode = 1
+
+[node name="health_text" type="Label" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 1025.0
+offset_right = 94.0
+offset_bottom = 1059.0
+theme_override_font_sizes/font_size = 24
+text = "health"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_layout_mode = 1
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="Head/Camera/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+metadata/_edit_use_custom_anchors = false
+metadata/_edit_layout_mode = 1
+
+[node name="Viewport" type="SubViewport" parent="Head/Camera/UI/ViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="MinimapCamera" type="Camera3D" parent="Head/Camera/UI/ViewportContainer/Viewport"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 100, 0)
+projection = 1
+size = 25.0
+script = ExtResource("4")
+
+[node name="CenterContainer" type="CenterContainer" parent="Head/Camera/UI"]
+layout_mode = 0
+offset_left = 956.0
+offset_top = 536.0
+offset_right = 964.0
+offset_bottom = 544.0
+
+[node name="Reloading" type="Sprite2D" parent="Head/Camera/UI"]
+position = Vector2(960, 540)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("7_1dl7g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera/UI/Reloading"]
+libraries = {
+&"": SubResource("AnimationLibrary_0smit")
+}
+
+[node name="CC" type="CenterContainer" parent="Head/Camera/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Control" parent="Head/Camera/UI/CC"]
+layout_mode = 2
+script = ExtResource("5_bb13o")
+player_path = NodePath("../../../../..")
+
+[node name="Top" type="Line2D" parent="Head/Camera/UI/CC/Crosshair"]
+points = PackedVector2Array(0, -15, 0, -5)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="Head/Camera/UI/CC/Crosshair"]
+points = PackedVector2Array(0, 15, 0, 5)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="Head/Camera/UI/CC/Crosshair"]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="Head/Camera/UI/CC/Crosshair"]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0
+
+[node name="SniperScope" type="TextureRect" parent="Head/Camera/UI"]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("7_bb13o")
+
+[node name="Grenade_Pos" type="Node3D" parent="Head/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head/Camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Head/Camera/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="GunCamera" type="Camera3D" parent="Head/Camera/SubViewportContainer/SubViewport"]
+cull_mask = 2
+
+[node name="Hand" type="Node3D" parent="Head/Camera"]
+script = ExtResource("7_vcdtb")
+
+[node name="FirstWeapon" parent="Head/Camera/Hand" instance=ExtResource("8_71jvt")]
+transform = Transform3D(-0.0695865, 0, -0.495134, 0, 0.5, 0, 0.495134, 0, -0.0695865, 0.29, -0.2, -0.95)
+visible = false
+
+[node name="SecondWeapon1" parent="Head/Camera/Hand" instance=ExtResource("9_o3wni")]
+transform = Transform3D(-0.0358534, -0.00307046, -0.0933012, 0.000523278, 0.0999377, -0.00348995, 0.0933502, -0.00173949, -0.035815, 0.23, -0.175, -0.4)
+visible = false
+
+[node name="SecondWeapon" parent="Head/Camera/Hand" instance=ExtResource("11_hsj3n")]
+transform = Transform3D(-0.0278346, 0, -0.198054, 0, 0.2, 0, 0.198054, 0, -0.0278346, 0.25, -0.25, -0.6)
+ads_position = Vector3(0.011, -0.23, -0.5)
+
+[node name="CollisionDetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="CollisionDetectionArea"]
+shape = SubResource("6")
+
+[node name="Interact Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_distance = 20.0
+
+[connection signal="ammo_changed" from="." to="Head/Camera/UI" method="_on_player_ammo_changed"]
+[connection signal="health_changed" from="." to="Head/Camera/UI" method="_on_player_health_changed"]
+[connection signal="property_list_changed" from="." to="." method="_on_player_property_list_changed"]
+[connection signal="speed_changed" from="." to="Head/Camera/UI" method="_on_player_speed_changed"]
+[connection signal="weapon_changed" from="." to="Head/Camera/UI" method="_on_player_weapon_changed"]
+[connection signal="body_entered" from="CollisionDetectionArea" to="." method="_on_Area_body_entered"]
+[connection signal="timeout" from="Interact Timer" to="." method="_on_Interact_Timer_timeout"]

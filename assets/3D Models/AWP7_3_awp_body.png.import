@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bhp70nw84o60h"
+path.s3tc="res://.godot/imported/AWP7_3_awp_body.png-59288ac6e5f4e2a1e2a0798d00ef774c.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "429a1effec32e8036575cb72eb5ac9b4"
+}
+
+[deps]
+
+source_file="res://assets/3D Models/AWP7_3_awp_body.png"
+dest_files=["res://.godot/imported/AWP7_3_awp_body.png-59288ac6e5f4e2a1e2a0798d00ef774c.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

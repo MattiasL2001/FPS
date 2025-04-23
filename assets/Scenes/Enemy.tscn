@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://dxasecjq6pvt4"]
+
+[ext_resource type="Script" uid="uid://bxdomfwyxvqld" path="res://assets/Scripts/Enemy.gd" id="1_h4js6"]
+[ext_resource type="Material" uid="uid://dnmadoandf442" path="res://assets/Materials/meshMat.tres" id="2"]
+[ext_resource type="Script" uid="uid://dhl1thlmulp20" path="res://assets/Scripts/AIController.gd" id="2_wimj2"]
+[ext_resource type="Script" uid="uid://bqhygwao4ftvh" path="res://assets/Scripts/StateMachine.gd" id="3_q7fu0"]
+[ext_resource type="Script" uid="uid://cl06apcp4p64j" path="res://assets/Scripts/MovementHandler.gd" id="4_wggto"]
+[ext_resource type="Script" uid="uid://d3htr2dmy66j1" path="res://assets/Scripts/CombatHandler.gd" id="5_cvbfd"]
+[ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="7_jqkfk"]
+
+[sub_resource type="CapsuleShape3D" id="1"]
+
+[sub_resource type="CapsuleMesh" id="2"]
+material = ExtResource("2")
+
+[sub_resource type="BoxMesh" id="4"]
+
+[sub_resource type="SphereShape3D" id="3"]
+radius = 10.0
+
+[node name="Enemy" type="CharacterBody3D" groups=["Enemies"]]
+script = ExtResource("1_h4js6")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="CollisionShape"]
+mesh = SubResource("2")
+
+[node name="MeshInstance2" type="MeshInstance3D" parent="CollisionShape"]
+transform = Transform3D(0.1, 0, 0, 0, 0.895686, 3.89992e-08, 0, 3.89992e-08, 0.656311, 0, 1, 0)
+mesh = SubResource("4")
+
+[node name="SightRange" type="Area3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="SightRange"]
+shape = SubResource("3")
+
+[node name="Eyes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RayCastCollission" type="RayCast3D" parent="Eyes"]
+target_position = Vector3(0, 0, -10)
+
+[node name="RayCastShooting" type="RayCast3D" parent="Eyes"]
+target_position = Vector3(0, 0, -10)
+
+[node name="Weapons" type="Node3D" parent="."]
+
+[node name="M16" parent="Weapons" instance=ExtResource("7_jqkfk")]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, -0.58028, 0.222064, 1.05707)
+script = null
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="AIController" type="Node" parent="."]
+script = ExtResource("2_wimj2")
+
+[node name="StateMachine" type="Node" parent="AIController"]
+script = ExtResource("3_q7fu0")
+
+[node name="MovementHandler" type="Node" parent="AIController"]
+script = ExtResource("4_wggto")
+
+[node name="CombatHandler" type="Node" parent="AIController"]
+script = ExtResource("5_cvbfd")
+
+[connection signal="body_entered" from="SightRange" to="." method="_on_SightRange_body_entered"]
+[connection signal="body_exited" from="SightRange" to="." method="_on_SightRange_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
