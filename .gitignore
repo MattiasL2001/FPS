@@ -22,6 +22,7 @@ desktop.ini
 # IDE configs
 .vscode/
 .idea/
+.vs/
 
 # Build/artifacts (om du råkar lägga dem i projektet)
 *.exe
