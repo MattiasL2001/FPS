@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cw7ephsb1veb1"]
+[gd_scene load_steps=6 format=3 uid="uid://cw7ephsb1veb1"]
 
 [ext_resource type="PackedScene" uid="uid://cw5nnn5873ida" path="res://assets/3D Models/M16.gltf" id="1_mcv1a"]
 [ext_resource type="Script" uid="uid://ca5yo6ijflrpo" path="res://assets/Scripts/Rifle1.gd" id="2_hpd62"]
 [ext_resource type="AudioStream" uid="uid://3j2bt2monwoj" path="res://assets/Sounds/pistol_sound.wav" id="3_nv2r2"]
 [ext_resource type="Material" path="res://assets/Materials/Material_001.material" id="3_pcues"]
+[ext_resource type="PackedScene" uid="uid://duk4sqtba71ul" path="res://assets/Scenes/muzzle.tscn" id="5_7jera"]
 
 [node name="M16" instance=ExtResource("1_mcv1a")]
 script = ExtResource("2_hpd62")
@@ -36,3 +37,6 @@ material_override = ExtResource("3_pcues")
 [node name="Audio" type="AudioStreamPlayer3D" parent="." index="8"]
 stream = ExtResource("3_nv2r2")
 pitch_scale = 1.5
+
+[node name="Muzzle" parent="." index="9" instance=ExtResource("5_7jera")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.95, 0.45, 0.075)

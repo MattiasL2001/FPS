@@ -27,44 +27,69 @@ func _ready():
 	await get_tree().process_frame
 	_generate_patrol_points()
 	if patrol_positions.size() > 0:
-		print("[READY] Startar patrullering mot:", patrol_positions[0])
+		pass
+		#print("[READY] Startar patrullering mot:", patrol_positions[0])
 	else:
-		print("[FEL] Inga patrullpunkter genererade!")
+		pass
+		#print("[FEL] Inga patrullpunkter genererade!")
 
 func _physics_process(delta):
 	var direction = Vector3.ZERO
+	var current_state = state_machine.get_state()
 
+	# Starta patrull-loop om den inte är igång
 	if patrolling and !patrol_loop_started:
 		patrol_loop_started = true
 		_start_patrol_loop()
 
+	# CHASING-beteenden – olika för varje typ
+	if current_state == state_machine.AIState.CHASING and player:
+		match behavior:
+			AIBehavior.RUSH:
+				agent.set_target_position(player.global_position)
+
+			AIBehavior.HOLD_POSITION:
+				# Håller position men roterar mot spelaren
+				agent.set_target_position(enemy.global_position)
+				enemy.look_at(player.global_position, Vector3.UP)
+
+			AIBehavior.FLANK:
+				var distance = enemy.global_position.distance_to(player.global_position)
+				if distance > 15:
+					agent.set_target_position(player.global_position)
+				elif distance < 8:
+					var away = (enemy.global_position - player.global_position).normalized()
+					agent.set_target_position(enemy.global_position + away * 5)
+				else:
+					agent.set_target_position(enemy.global_position)
+
+	# Räkna ut rörelseriktning
 	if not agent.is_navigation_finished():
 		var next_pos = agent.get_next_path_position()
 		direction = (next_pos - enemy.global_position).normalized()
 
+	# Rörelse & gravitation
 	enemy.velocity.x = direction.x * move_speed
 	enemy.velocity.z = direction.z * move_speed
-	if enemy.is_on_floor():
-		enemy.velocity.y = 0
-	else:
-		enemy.velocity.y -= gravity
-
+	enemy.velocity.y = 0 if enemy.is_on_floor() else enemy.velocity.y - gravity
 	enemy.move_and_slide()
+
 	_rotate_towards(direction)
 
-	if state_machine.get_state() == state_machine.AIState.CHASING and player:
+	# Attackrange-check (bara för RUSH egentligen, men du kan justera)
+	if current_state == state_machine.AIState.CHASING and player:
 		var dist = enemy.global_position.distance_to(player.global_position)
-		if dist < 2.0:
+		if dist < 2.0 and behavior == AIBehavior.RUSH:
 			set_state(state_machine.AIState.ATTACKING)
-			print("[ATTACK] Inom räckvidd, byter till ATTACKING")
+			#print("[ATTACK] Inom räckvidd, byter till ATTACKING")
 
-	# Raycast för att upptäcka spelare
+	# Raycast för att bekräfta visuell kontakt (första gång)
 	if player != null and not has_spotted:
 		raycast.look_at(player.global_position)
 		raycast.force_raycast_update()
 		if raycast.is_colliding() and raycast.get_collider() == player:
 			has_spotted = true
-			print("[DETEKTION] Spelare upptäckt!")
+			#print("[DETEKTION] Spelare upptäckt!")
 			set_state(state_machine.AIState.CHASING)
 
 func _on_state_changed(new_state: int):
@@ -96,13 +121,15 @@ func _generate_patrol_points():
 			var path = agent.get_current_navigation_path()
 			if path.size() > 1:
 				patrol_positions.append(path[-1])
-				print("[PATHGEN] Lägger till:", path[-1])
+				#print("[PATHGEN] Lägger till:", path[-1])
 			else:
-				print("[PATHGEN] Path för kort (", path.size(), ")")
+				pass
+				#print("[PATHGEN] Path för kort (", path.size(), ")")
 		else:
-			print("[PATHGEN] Otillgänglig punkt:", goal_position)
+			pass
+			#print("[PATHGEN] Otillgänglig punkt:", goal_position)
 
-	print("[PATHGEN] Totalt:", patrol_positions.size(), "punkter")
+	#print("[PATHGEN] Totalt:", patrol_positions.size(), "punkter")
 
 func _start_patrol_loop() -> void:
 	await get_tree().process_frame
@@ -110,7 +137,7 @@ func _start_patrol_loop() -> void:
 
 	while patrolling and !has_spotted and patrol_positions.size() > 0:
 		var next_pos = patrol_positions[current_patrol_index]
-		print("[PATRULL] Går till punkt", current_patrol_index, "→", next_pos)
+		#print("[PATRULL] Går till punkt", current_patrol_index, "→", next_pos)
 
 		agent.set_target_position(next_pos)
 
@@ -120,7 +147,7 @@ func _start_patrol_loop() -> void:
 		if has_spotted:
 			break
 
-		print("[PATRULL] Nådde punkt", current_patrol_index, ", väntar", wait_time, "sek")
+		#print("[PATRULL] Nådde punkt", current_patrol_index, ", väntar", wait_time, "sek")
 		await get_tree().create_timer(wait_time).timeout
 
 		current_patrol_index = (current_patrol_index + 1) % patrol_positions.size()
@@ -132,7 +159,8 @@ func set_state(new_state: int):
 	if state_machine:
 		state_machine.set_state(new_state)
 	else:
-		print("[FEL] Kunde inte byta state – state_machine saknas")
+		pass
+		#print("[FEL] Kunde inte byta state – state_machine saknas")
 
 func chase(new_target: Node3D):
 	patrolling = false
@@ -142,20 +170,20 @@ func chase(new_target: Node3D):
 
 	match behavior:
 		AIBehavior.RUSH:
-			print("[CHASE] RUSH – springer rakt på spelaren")
+			#print("[CHASE] RUSH – springer rakt på spelaren")
 			agent.set_target_position(player.global_position)
 
 		AIBehavior.HOLD_POSITION:
-			print("[CHASE] HOLD_POSITION – stannar kvar och skjuter")
+			#print("[CHASE] HOLD_POSITION – stannar kvar och skjuter")
 			agent.set_target_position(enemy.global_position)
 
 		AIBehavior.FLANK:
-			print("[CHASE] FLANK – försöker gå runt")
+			#print("[CHASE] FLANK – försöker gå runt")
 			var offset = Vector3(2, 0, -2)
 			agent.set_target_position(player.global_position + offset)
 
 func stop():
-	print("[STOP] Slutar jaga, återgår till patrull")
+	#print("[STOP] Slutar jaga, återgår till patrull")
 	patrolling = true
 	player = null
 	has_spotted = false

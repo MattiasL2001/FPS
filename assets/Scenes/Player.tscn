@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctkitjg74vkyt"]
+[gd_scene load_steps=19 format=3 uid="uid://ctkitjg74vkyt"]
 
 [ext_resource type="Script" uid="uid://ck24t1f3wht57" path="res://assets/Scripts/UI.gd" id="1"]
 [ext_resource type="Script" uid="uid://dujkjvxctucc4" path="res://assets/Scripts/Player.gd" id="3"]
@@ -7,16 +7,23 @@
 [ext_resource type="Texture2D" uid="uid://bauiufvbddmkm" path="res://assets/Images/Loading.png" id="7_1dl7g"]
 [ext_resource type="Texture2D" uid="uid://que1pl57pmwe" path="res://assets/Images/sniper.png" id="7_bb13o"]
 [ext_resource type="Script" uid="uid://c3nwxofvs40td" path="res://assets/Scripts/HandController.gd" id="7_vcdtb"]
-[ext_resource type="Material" uid="uid://dnmadoandf442" path="res://assets/Materials/meshMat.tres" id="8"]
 [ext_resource type="PackedScene" uid="uid://byou4g1e2yeni" path="res://assets/3D Models/awp.tscn" id="8_71jvt"]
 [ext_resource type="PackedScene" uid="uid://cdafydtc3mp4r" path="res://assets/3D Models/Pistol.tscn" id="9_o3wni"]
+[ext_resource type="PackedScene" uid="uid://bjryy84b6nnlb" path="res://assets/3D Models/Knife.tscn" id="11_bb13o"]
 [ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="11_hsj3n"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.9
 
-[sub_resource type="CapsuleMesh" id="2"]
-material = ExtResource("8")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcdtb"]
+albedo_color = Color(1, 0.921569, 0.392157, 1)
+metallic_specular = 0.73
+roughness = 0.22
+emission_enabled = true
+emission = Color(0.144063, 0.144063, 0.144063, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vcdtb"]
+material = SubResource("StandardMaterial3D_vcdtb")
 height = 1.9
 
 [sub_resource type="LabelSettings" id="LabelSettings_n84x6"]
@@ -44,6 +51,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape3D" id="6"]
+height = 1.9
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("3")
@@ -53,17 +61,21 @@ shape = SubResource("1")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="CollisionShape"]
 layers = 2
-mesh = SubResource("2")
+mesh = SubResource("CapsuleMesh_vcdtb")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.2)
 
 [node name="Camera" type="Camera3D" parent="Head"]
+cull_mask = 1048573
 current = true
 
 [node name="RayCastShooting" type="RayCast3D" parent="Head/Camera"]
 
 [node name="RayCastInteraction" type="RayCast3D" parent="Head/Camera"]
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+collide_with_areas = true
 
 [node name="UI" type="Control" parent="Head/Camera"]
 layout_mode = 3
@@ -260,17 +272,24 @@ cull_mask = 2
 [node name="Hand" type="Node3D" parent="Head/Camera"]
 script = ExtResource("7_vcdtb")
 
-[node name="FirstWeapon" parent="Head/Camera/Hand" instance=ExtResource("8_71jvt")]
+[node name="FirstWeapon2" parent="Head/Camera/Hand" instance=ExtResource("8_71jvt")]
 transform = Transform3D(-0.0695865, 0, -0.495134, 0, 0.5, 0, 0.495134, 0, -0.0695865, 0.29, -0.2, -0.95)
 visible = false
 
-[node name="SecondWeapon1" parent="Head/Camera/Hand" instance=ExtResource("9_o3wni")]
-transform = Transform3D(-0.0358534, -0.00307046, -0.0933012, 0.000523278, 0.0999377, -0.00348995, 0.0933502, -0.00173949, -0.035815, 0.23, -0.175, -0.4)
+[node name="SecondWeapon" parent="Head/Camera/Hand" instance=ExtResource("9_o3wni")]
+transform = Transform3D(-0.0342445, -0.00280163, -0.0939121, 0.00139537, 0.0999293, -0.00348996, 0.0939434, -0.00250554, -0.0341813, 0.23, -0.18, -0.39)
 visible = false
 
-[node name="SecondWeapon" parent="Head/Camera/Hand" instance=ExtResource("11_hsj3n")]
-transform = Transform3D(-0.0278346, 0, -0.198054, 0, 0.2, 0, 0.198054, 0, -0.0278346, 0.25, -0.25, -0.6)
+[node name="FirstWeapon" parent="Head/Camera/Hand" instance=ExtResource("11_hsj3n")]
+transform = Transform3D(-0.0278347, 0, -0.198054, 0, 0.2, 0, 0.198054, 0, -0.0278347, 0.25, -0.25, -0.6)
 ads_position = Vector3(0.011, -0.23, -0.5)
+
+[node name="MeleeWeapon" parent="Head/Camera/Hand" instance=ExtResource("11_bb13o")]
+transform = Transform3D(0.0403587, -0.0224591, -0.0191511, -0.0241481, -0.00647048, -0.0433013, 0.0169718, 0.044201, -0.0160697, 0.15, -0.1, -0.25)
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+cull_mask = 2
 
 [node name="CollisionDetectionArea" type="Area3D" parent="."]
 

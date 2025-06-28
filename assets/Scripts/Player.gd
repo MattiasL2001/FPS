@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 @export var health : int = 100
 @export var original_speed : float = 4
@@ -15,13 +16,17 @@ var is_running : bool = false
 var crouch_gravity = gravity * 1.5
 @export var jump_power = 15
 @export var inertia = 100
-@export var current_weapon : Weapon
+var current_weapon : Weapon
 @export var mouse_sensitivity : float = 0.15
 var zoom_sensitivity_multiplier := 1.0
 var weapon_switch : bool = true
-var grenade_ammo : int = 1
-@export var first_weapon : Node3D
-@export var second_weapon : Node3D
+var grenade_ammo : int = 100
+@export var first_weapon : RangedWeapon
+@export var second_weapon : RangedWeapon
+@export var melee_weapon: MeleeWeapon
+var all_weapons: Array[Weapon] = []
+var current_weapon_index: int = 0
+
 @onready var grenade_packed = preload("res://assets/Scenes/Grenade.tscn")
 @onready var grenade = grenade_packed.instantiate()
 
@@ -39,6 +44,9 @@ var grenade_ammo : int = 1
 @onready var interact_raycast : RayCast3D = $Head/Camera/RayCastInteraction
 @onready var raycast_shooting : RayCast3D = $Head/Camera/RayCastShooting
 @onready var fall_damage_threshold = 5
+
+var interact_target: Interactable = null
+
 signal speed_changed
 signal timer_finished
 signal update_transform
@@ -51,12 +59,16 @@ var camera_x_rotation = 0
 func _ready():
 	first_weapon = $Head/Camera/Hand/FirstWeapon
 	second_weapon = $Head/Camera/Hand/SecondWeapon
-	current_weapon = first_weapon
+	melee_weapon = $Head/Camera/Hand/MeleeWeapon
+	all_weapons = [first_weapon, second_weapon, melee_weapon]
+	current_weapon_index = 0
+	_activate_weapon(current_weapon_index)
+
 	raycast_shooting.set_target_position(Vector3(0, 0, -first_weapon.fire_range))
 	second_weapon.visible = false
 	emit_signal("speed_changed", speed)
 	emit_signal("health_changed", health)
-	emit_signal("weapon_changed", current_weapon.weapon_class)
+	emit_signal("weapon_changed", current_weapon.weapon_type)
 	change_ammo_ui()
 	_updater()
 
@@ -69,64 +81,58 @@ func _input(event):
 			camera.rotate_x(deg_to_rad(-x_delta))
 			camera_x_rotation += x_delta
 
-	if event.is_action_pressed("aim"):
-		if current_weapon:
-			current_weapon.set_aiming(true)
-	elif event.is_action_released("aim"):
-		if current_weapon:
-			current_weapon.set_aiming(false)
+	if event.is_action_pressed("aim") and current_weapon.has_method("set_aiming"):
+		current_weapon.set_aiming(true)
+	elif event.is_action_released("aim") and current_weapon.has_method("set_aiming"):
+		current_weapon.set_aiming(false)
+
+	if event.is_action_pressed("interact"):
+		if interact_target:
+			interact_target.interact_with(self)
 
 	if event is InputEventMouseButton:
-		if event.button_index == 4 or event.button_index == 5:
-			_weapon_switch()
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			_weapon_switch(1)  # scroll ner
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			_weapon_switch(-1)  # scroll upp
 
 func _updater():
 	var hit = false
-
-	if (current_weapon == first_weapon 
-	and first_weapon.check_array_col()) or (current_weapon == second_weapon 
-	and second_weapon.check_array_col()):
+	if current_weapon is RangedWeapon and current_weapon.check_array_col():
 		hit = true
-
 	crosshair.call("set_targeting_state", hit)
-
 	await get_tree().create_timer(0.1).timeout
 	_updater()
 
 func _process(delta):
 	gun_cam.global_transform = camera.global_transform
 	if Input.is_action_pressed("Grenade") and get_node("../Grenade") != null and grenade_ammo > 0:
-		get_node("../Grenade").set_position(
-		Vector3(to_global(get_node("Head/Camera/Grenade_Pos").get_position())))
+		get_node("../Grenade").set_position(Vector3(to_global(get_node("Head/Camera/Grenade_Pos").get_position())))
 
 func _physics_process(delta):
 	var rotation = head.global_transform.basis.get_euler().y
 	emit_signal("update_transform", get_position(), rotation)
-	
 	var head_basis = head.get_global_transform().basis
+
 	direction = Vector3()
-
-	if (Input.is_action_pressed("move_fw")):
+	if Input.is_action_pressed("move_fw"):
 		direction -= head_basis.z
-	elif (Input.is_action_pressed("move_bw")):
+	if Input.is_action_pressed("move_bw"):
 		direction += head_basis.z
-
-	if (Input.is_action_pressed("move_l")):
+	if Input.is_action_pressed("move_l"):
 		direction -= head_basis.x
-	elif (Input.is_action_pressed("move_r")):
+	if Input.is_action_pressed("move_r"):
 		direction += head_basis.x
+	direction = direction.normalized()
 
 	if (abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1) and !audio.playing:
 		audio.stop()
-		if !is_running:
-			audio.stream = walking
-		else:
-			audio.stream = running
+		audio.stream = running if is_running else walking
 		audio.play(0)
 	elif (abs(velocity.x) < 0.1 and abs(velocity.z) < 0.1) or !is_on_floor():
 		audio.stop()
 
-	if (Input.is_action_just_pressed("shift")):
+	if Input.is_action_just_pressed("shift"):
 		audio.stop()
 		audio.stream = running
 		audio.play()
@@ -148,38 +154,25 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("jump") and is_on_floor() and can_jump:
 		_jump()
+	if Input.is_action_just_pressed("Grenade"):
+		throw_grenade()
 
-	var is_aiming = current_weapon.is_aiming if current_weapon else false
-
-	if is_aiming:
-		speed = original_speed * .5
-		crosshair.visible = false
-		if current_weapon.is_scoped:
-			sniper_scope.visible = true
-	elif Input.is_action_pressed("shift"):
+	if Input.is_action_pressed("shift"):
 		speed = sprint_speed
 		is_running = true
-		crosshair.visible = true
-		sniper_scope.visible = false
 	elif Input.is_action_pressed("ctrl"):
 		speed = crouch_speed
-		crosshair.visible = true
-		sniper_scope.visible = false
 	else:
 		speed = original_speed
-		crosshair.visible = true
-		sniper_scope.visible = false
 
-	# Korrigera mushastighet baserat på zoom
-	if current_weapon and current_weapon.is_aiming:
+	if current_weapon is RangedWeapon:
+		current_weapon.update_aim_state()
+
+	if current_weapon is RangedWeapon and current_weapon.is_aiming:
 		var base_fov = 70.0
-		var current_fov = current_weapon.camera.fov
-		zoom_sensitivity_multiplier = clamp(current_fov / base_fov, 0.2, 1.0)
+		zoom_sensitivity_multiplier = clamp(current_weapon.camera.fov / base_fov, 0.2, 1.0)
 	else:
 		zoom_sensitivity_multiplier = 1.0
-
-	direction = direction.normalized()
-	velocity = Vector3(speed * direction.x, velocity.y, speed * direction.z)
 
 	if is_on_floor():
 		agility = 1
@@ -187,6 +180,7 @@ func _physics_process(delta):
 		agility = 1.05
 		velocity.y -= self.gravity * delta
 
+	velocity = Vector3(speed * direction.x, velocity.y, speed * direction.z)
 	velocity = Vector3(velocity.x * agility, velocity.y, velocity.z * agility)
 	velocity.lerp(direction * speed, 0.5)
 	move_and_slide()
@@ -197,38 +191,63 @@ func _jump():
 	await get_tree().create_timer(.5).timeout
 	can_jump = true
 
-func _weapon_switch():
-	get_node("Head/Camera/UI/Reloading").visible = false
+func _weapon_switch(direction: int):
+	if not weapon_switch or all_weapons.size() < 2:
+		return
+	weapon_switch = false
 
-	if weapon_switch:
-		if current_weapon == first_weapon:
-			current_weapon = second_weapon
-			emit_signal("weapon_changed", current_weapon.weapon_class)
-			first_weapon.is_active = false
-			second_weapon.is_active = true
-			first_weapon.visible = false
-			second_weapon.visible = true
-			first_weapon.reloading = false
-			second_weapon.is_aiming = false
-			second_weapon.emit_signal("ammo_changed", second_weapon.current_ammo, second_weapon.ammo_total)
-			raycast_shooting.set_target_position(Vector3(0, 0, -second_weapon.fire_range))
-			change_ammo_ui()
-			weapon_switch = false
-		elif current_weapon == second_weapon:
-			current_weapon = first_weapon
-			emit_signal("weapon_changed", current_weapon.weapon_class)
-			first_weapon.is_active = true
-			second_weapon.is_active = false
-			first_weapon.visible = true
-			second_weapon.visible = false
-			second_weapon.reloading = false
-			first_weapon.is_aiming = false
-			first_weapon.emit_signal("ammo_changed", first_weapon.current_ammo, first_weapon.ammo_total)
-			raycast_shooting.set_target_position(Vector3(0, 0, -first_weapon.fire_range))
-			change_ammo_ui()
-			weapon_switch = false
-		await get_tree().create_timer(.3).timeout
-		weapon_switch = true
+	if current_weapon.has_method("cancel_reload"):
+		current_weapon.cancel_reload()
+	if current_weapon.has_method("set_aiming"):
+		current_weapon.set_aiming(false)
+		
+	current_weapon.deactivate()
+
+	current_weapon_index = (current_weapon_index + direction) % all_weapons.size()
+	current_weapon = all_weapons[current_weapon_index]
+	current_weapon.activate()
+
+	if current_weapon.has_method("fire_range"):
+		raycast_shooting.set_target_position(Vector3(0, 0, -current_weapon.fire_range))
+
+	change_ammo_ui()
+	emit_signal("weapon_changed", current_weapon.weapon_type)
+
+	await get_tree().create_timer(0.3).timeout
+	weapon_switch = true
+
+func _activate_weapon(index: int):
+	for i in range(all_weapons.size()):
+		var weapon = all_weapons[i]
+		var active = (i == index)
+		weapon.is_active = active
+		weapon.visible = active
+		if weapon.has_method("set_aiming"):
+			weapon.set_aiming(false)
+	current_weapon_index = index
+	current_weapon = all_weapons[index]
+	emit_signal("weapon_changed", current_weapon.weapon_type)
+	if current_weapon.has_method("fire_range"):
+		raycast_shooting.set_target_position(Vector3(0, 0, -current_weapon.fire_range))
+	change_ammo_ui()
+
+func throw_grenade():
+	if grenade_ammo <= 0:
+		return
+	var thrown_grenade: Grenade = grenade_packed.instantiate()
+	get_tree().current_scene.add_child(thrown_grenade)
+	thrown_grenade.global_transform.origin = (camera.global_transform.origin + 
+	camera.global_transform.basis.z * -1.5)
+	var throw_dir = -camera.global_transform.basis.z.normalized()
+	thrown_grenade._throw(throw_dir)
+	grenade_ammo -= 1
+
+func give_ammo(amount: int, type: WeaponType.Type) -> void:
+	for weapon in [first_weapon, second_weapon]:
+		if weapon.weapon_type == type:
+			weapon.ammo_total += amount
+			if weapon == current_weapon:
+				change_ammo_ui()
 
 func damage(damage):
 	health -= damage
@@ -237,10 +256,10 @@ func damage(damage):
 	emit_signal("health_changed", health)
 
 func change_ammo_ui():
-	if current_weapon == first_weapon:
-		emit_signal("ammo_changed", first_weapon.current_ammo, first_weapon.ammo_total)
-	elif current_weapon == second_weapon:
-		emit_signal("ammo_changed", second_weapon.current_ammo, second_weapon.ammo_total)
+	if current_weapon is RangedWeapon:
+		emit_signal("ammo_changed", current_weapon.current_ammo, current_weapon.ammo_total)
+	else:
+		emit_signal("ammo_changed", "∞", "∞")
 
 func _on_Area_body_entered(body):
 	if body != self:
@@ -249,11 +268,16 @@ func _on_Area_body_entered(body):
 func check_collision():
 	if interact_raycast.is_colliding():
 		var collider = interact_raycast.get_collider()
-		if collider.is_in_group("Interact"):
-			if interact_text.is_visible() == false:
-				interact_text.set_visible(true)
+		if collider is Interactable:
+			var interactable: Interactable = collider
+			interact_text.text = interactable.get_interact_text()
+			interact_target = collider
+			interact_text.visible = true
+		else:
+			interact_text.visible = false
 	else:
-		interact_text.set_visible(false)
+		interact_target = null
+		interact_text.visible = false
 
 func _on_Timer_timeout():
 	emit_signal("timer_finished")

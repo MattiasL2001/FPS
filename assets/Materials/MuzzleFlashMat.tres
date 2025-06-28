@@ -1,0 +1,17 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://bmqw2lf3tux6a"]
+
+[sub_resource type="Curve" id="Curve_7o3ic"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.00471698, 2), 0.0, -7.39197, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pdcrm"]
+curve = SubResource("Curve_7o3ic")
+
+[resource]
+angle_min = -50.0
+angle_max = 50.0
+initial_velocity_min = -2.4
+initial_velocity_max = 4.5
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_pdcrm")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://duk4sqtba71ul"]
+
+[ext_resource type="Material" uid="uid://bmqw2lf3tux6a" path="res://assets/Materials/MuzzleFlashMat.tres" id="1_bxh64"]
+[ext_resource type="QuadMesh" uid="uid://dbdpnxt423yw7" path="res://assets/Materials/MuzzleQuadMesh.tres" id="2_j6xrc"]
+
+[node name="Muzzle" type="GPUParticles3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+emitting = false
+lifetime = 0.15
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = ExtResource("1_bxh64")
+draw_pass_1 = ExtResource("2_j6xrc")

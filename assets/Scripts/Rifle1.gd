@@ -1,12 +1,15 @@
-extends Weapon
+extends RangedWeapon
 
 func _init():
 	weapon_name = "Rifle1"
-	aim_fov = 50
-	weapon_class = 1
-	fire_range = 20
+	weapon_type = WeaponType.Type.PRIMARY
+	can_aim = true
+	fire_range = 80
 	fire_rate = 0.1
-	damage = 11
+	aim_fov = 50
+	ads_position = Vector3(0.011, -0.225, -0.5)
+	ads_rotation = Vector3(0, -90, -0.5)
+	damage = 21
 	clip_size = 30
 	reload_rate = 2
 	ammo_total = 90

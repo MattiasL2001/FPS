@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Enemy
 
 @onready var state_machine = $AIController/StateMachine
 @onready var combat_handler = $AIController/CombatHandler
@@ -21,6 +22,10 @@ func _on_SightRange_body_exited(body):
 
 func take_damage(damage: int):
 	health -= damage
+	
 	if health <= 0:
-		state_machine.set_state(state_machine.AIState.DEAD)
-		queue_free()
+		kill()
+
+func kill():
+	state_machine.set_state(state_machine.AIState.DEAD)
+	queue_free()
