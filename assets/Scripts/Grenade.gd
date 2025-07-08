@@ -11,17 +11,26 @@ class_name Grenade
 var stopped := false
 
 func _ready():
-	linear_damp = .5
+	linear_damp = .02
 	angular_damp = 1
 	$ExplosionRadius.get_node("CollisionShape3D").shape.radius = radius
 	$EnemyDetector.body_entered.connect(_on_enemy_touched)
 	await get_tree().create_timer(explodeTime).timeout
 	_explode()
 
+func _physics_process(delta):
+	if get_contact_count() > 0:
+		linear_damp = 8.0
+	else:
+		linear_damp = 0.02
+
 func _throw(throw_direction: Vector3):
 	sleeping = false
 	freeze = false
-	apply_impulse((throw_direction + Vector3.UP * 0.5).normalized() * force, Vector3.ZERO)
+	var base_dir = (throw_direction + Vector3.UP * 0.5).normalized()
+	var clamped_dir = Vector3(base_dir.x, min(base_dir.y, 0.7), base_dir.z).normalized()
+	apply_impulse(clamped_dir * force, Vector3.ZERO)
+
 
 func _on_enemy_touched(body):
 	if stopped:

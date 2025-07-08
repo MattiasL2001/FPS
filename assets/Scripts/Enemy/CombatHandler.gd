@@ -5,7 +5,6 @@ extends Node
 @onready var raycast = eyes.get_node("RayCastShooting")
 @onready var shoottimer = enemy.get_node("ShootTimer")
 
-var player: Node3D
 var damage := 20
 var enabled := false
 
@@ -16,9 +15,6 @@ func enable():
 func disable():
 	enabled = false
 	shoottimer.stop()
-
-func get_target():
-	return player
 
 func _on_shoot_timer_timeout():
 	if !enabled:

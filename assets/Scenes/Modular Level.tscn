@@ -41,492 +41,100 @@ data = PackedVector3Array(0, 0, 0, 0, 0, -4.7, 0, 0.4, -4.7, 1, 2, -4.7, 0, 0.4,
 [node name="Level" type="Node3D" groups=["Level"]]
 script = ExtResource("1_g6a31")
 
-[node name="Players_Enemies" type="Node3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("4_wbq2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 5, 0)
 
-[node name="Enemy" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -4)
 
-[node name="Enemy2" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 6, -18)
+[node name="Enemy2" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, -27)
 
-[node name="Enemy3" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -18)
+[node name="Enemy3" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -18)
 
-[node name="Enemy4" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy4" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -11)
 
-[node name="Enemy5" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, -15)
+[node name="Enemy5" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -15)
 
-[node name="Enemy6" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6, -20)
+[node name="Enemy6" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -25)
 
-[node name="Enemy7" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 9, -20)
+[node name="Enemy7" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, -26)
 
-[node name="Enemy8" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 6, -18)
+[node name="Enemy8" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, -18)
 
-[node name="Enemy9" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 8, 8)
+[node name="Enemy9" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 17)
 
-[node name="Enemy10" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, -3)
+[node name="Enemy10" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, -4)
 
-[node name="Enemy11" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy11" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -11)
 
-[node name="Enemy12" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 9, -10)
+[node name="Enemy12" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, -10)
 
-[node name="Enemy13" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy13" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 8)
 
-[node name="Enemy14" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy14" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6, -8)
 
-[node name="Enemy15" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy15" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, -11)
 
-[node name="Enemy16" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 6, -18)
+[node name="Enemy16" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -20)
 
-[node name="Enemy17" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 11, 9)
+[node name="Enemy17" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 13)
 
-[node name="Enemy18" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 12, -2)
+[node name="Enemy18" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
 
-[node name="Enemy19" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 6, -10)
+[node name="Enemy19" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, -10)
 
-[node name="Enemy20" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 12, -9)
+[node name="Enemy20" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -6)
 
-[node name="Enemy21" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy21" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 9)
 
-[node name="Enemy22" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9, 3)
+[node name="Enemy22" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, 3)
 
-[node name="Enemy23" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 5, -14)
+[node name="Enemy23" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 5, 11)
 
-[node name="Enemy24" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy24" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -12)
+
+[node name="Enemy25" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 3)
+
+[node name="Enemy26" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, -15)
+
+[node name="Enemy27" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, -18)
+
+[node name="Enemy28" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, -7)
 
-[node name="Enemy25" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 8, -4)
+[node name="Enemy29" parent="Enemies" instance=ExtResource("3_u16nr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, 0)
 
-[node name="Enemy26" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 9, -9)
-
-[node name="Enemy27" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 12, -9)
-
-[node name="Enemy28" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, -7)
-
-[node name="Enemy29" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 0)
-
-[node name="Enemy30" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
+[node name="Enemy30" parent="Enemies" instance=ExtResource("3_u16nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6, -7)
-
-[node name="Enemy31" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 83.9526, -7)
-
-[node name="Enemy32" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 80.9526, -3)
-
-[node name="Enemy33" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 91.9526, 1)
-
-[node name="Enemy34" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 92.9526, -20)
-
-[node name="Enemy35" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 86.9526, -18)
-
-[node name="Enemy36" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 92.9526, -27)
-
-[node name="Enemy37" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 85.9526, 25)
-
-[node name="Enemy38" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 89.9526, 19)
-
-[node name="Enemy39" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 85.9526, 16)
-
-[node name="Enemy40" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 89.9526, 9)
-
-[node name="Enemy41" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 88.9526, 12)
-
-[node name="Enemy42" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 89.9526, 7)
-
-[node name="Enemy43" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 92.9526, 7)
-
-[node name="Enemy44" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 89.9526, 9)
-
-[node name="Enemy45" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 85.9526, -18)
-
-[node name="Enemy46" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 86.9526, -25)
-
-[node name="Enemy47" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 89.9526, -25)
-
-[node name="Enemy48" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 86.9526, -11)
-
-[node name="Enemy49" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 88.9526, -10)
-
-[node name="Enemy50" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 89.9526, -21)
-
-[node name="Enemy51" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 83.9526, -19)
-
-[node name="Enemy52" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 89.9526, -28)
-
-[node name="Enemy53" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 82.9526, -10)
-
-[node name="Enemy54" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 86.9526, -16)
-
-[node name="Enemy55" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 82.9526, -19)
-
-[node name="Enemy56" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 86.9526, -26)
-
-[node name="Enemy57" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 85.9526, -23)
-
-[node name="Enemy58" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 86.9526, -28)
-
-[node name="Enemy59" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 89.9526, -28)
-
-[node name="Enemy60" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 86.9526, -26)
-
-[node name="Enemy61" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 82.9526, -19)
-
-[node name="Enemy62" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 83.9526, -26)
-
-[node name="Enemy63" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 86.9526, -26)
-
-[node name="Enemy64" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 38.4087, -22)
-
-[node name="Enemy65" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 52.4087, 4)
-
-[node name="Enemy66" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 53.4087, -17)
-
-[node name="Enemy67" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 47.4087, -15)
-
-[node name="Enemy68" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 53.4087, -24)
-
-[node name="Enemy69" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 33.4087, 27)
-
-[node name="Enemy70" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 50.4087, 22)
-
-[node name="Enemy71" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 46.4087, 19)
-
-[node name="Enemy72" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 50.4087, 12)
-
-[node name="Enemy73" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 49.4087, 15)
-
-[node name="Enemy74" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 50.4087, 10)
-
-[node name="Enemy75" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 53.4087, 10)
-
-[node name="Enemy76" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 50.4087, 12)
-
-[node name="Enemy77" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 46.4087, -15)
-
-[node name="Enemy78" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 47.4087, -22)
-
-[node name="Enemy79" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 50.4087, -22)
-
-[node name="Enemy80" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 47.4087, -8)
-
-[node name="Enemy81" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 49.4087, -7)
-
-[node name="Enemy82" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 50.4087, -18)
-
-[node name="Enemy83" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 44.4087, -16)
-
-[node name="Enemy84" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 50.4087, -25)
-
-[node name="Enemy85" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 43.4087, -7)
-
-[node name="Enemy86" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 47.4087, -13)
-
-[node name="Enemy87" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 43.4087, -16)
-
-[node name="Enemy88" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 47.4087, -23)
-
-[node name="Enemy89" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 46.4087, -20)
-
-[node name="Enemy90" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 47.4087, -25)
-
-[node name="Enemy91" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 50.4087, -25)
-
-[node name="Enemy92" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 47.4087, -23)
-
-[node name="Enemy93" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.4087, -16)
-
-[node name="Enemy94" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 44.4087, -23)
-
-[node name="Enemy95" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 47.4087, -23)
-
-[node name="Enemy96" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 44.4087, -19)
-
-[node name="Enemy97" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 46.4087, 12)
-
-[node name="Enemy98" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 47.4087, 1)
-
-[node name="Enemy99" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 41.4087, -7)
-
-[node name="Enemy100" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 47.4087, -6)
-
-[node name="Enemy101" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 40.4087, 12)
-
-[node name="Enemy102" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 44.4087, 6)
-
-[node name="Enemy103" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 40.4087, -11)
-
-[node name="Enemy104" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 44.4087, -4)
-
-[node name="Enemy105" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 43.4087, -1)
-
-[node name="Enemy106" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 44.4087, -6)
-
-[node name="Enemy107" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 47.4087, -6)
-
-[node name="Enemy108" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 44.4087, -4)
-
-[node name="Enemy109" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 40.4087, 3)
-
-[node name="Enemy110" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41.4087, -4)
-
-[node name="Enemy111" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 44.4087, -4)
-
-[node name="Enemy112" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 41.4087, 0)
-
-[node name="Enemy113" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 43.4087, 11)
-
-[node name="Enemy114" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 44.4087, 0)
-
-[node name="Enemy115" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 38.4087, -8)
-
-[node name="Enemy116" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 44.4087, -7)
-
-[node name="Enemy117" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 37.4087, 11)
-
-[node name="Enemy118" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 41.4087, -5)
-
-[node name="Enemy119" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 37.4087, -8)
-
-[node name="Enemy120" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 41.4087, -15)
-
-[node name="Enemy121" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 40.4087, -12)
-
-[node name="Enemy122" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 41.4087, -17)
-
-[node name="Enemy123" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 44.4087, -17)
-
-[node name="Enemy124" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 41.4087, -15)
-
-[node name="Enemy125" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 37.4087, -8)
-
-[node name="Enemy126" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 38.4087, -15)
-
-[node name="Enemy127" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 41.4087, -15)
-
-[node name="Enemy128" parent="Players_Enemies" instance=ExtResource("3_u16nr")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 38.4087, -1)
-
-[node name="Player" parent="Players_Enemies" instance=ExtResource("4_wbq2j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 5, 0)
 
 [node name="Game_Manager" type="Node3D" parent="."]
 script = ExtResource("5_isdxn")

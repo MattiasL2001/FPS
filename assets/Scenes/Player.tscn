@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ck24t1f3wht57" path="res://assets/Scripts/UI.gd" id="1"]
 [ext_resource type="Script" uid="uid://dujkjvxctucc4" path="res://assets/Scripts/Player.gd" id="3"]
-[ext_resource type="Script" uid="uid://lh7nfgo1nv1s" path="res://assets/Scripts/MinimapCamera.gd" id="4"]
 [ext_resource type="Script" uid="uid://ftvojs1vsvya" path="res://assets/Scripts/Crosshair.gd" id="5_bb13o"]
 [ext_resource type="Texture2D" uid="uid://bauiufvbddmkm" path="res://assets/Images/Loading.png" id="7_1dl7g"]
 [ext_resource type="Texture2D" uid="uid://que1pl57pmwe" path="res://assets/Images/sniper.png" id="7_bb13o"]
@@ -11,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://cdafydtc3mp4r" path="res://assets/3D Models/Pistol.tscn" id="9_o3wni"]
 [ext_resource type="PackedScene" uid="uid://bjryy84b6nnlb" path="res://assets/3D Models/Knife.tscn" id="11_bb13o"]
 [ext_resource type="PackedScene" uid="uid://cw7ephsb1veb1" path="res://assets/3D Models/M16.tscn" id="11_hsj3n"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bb13o"]
+height = 5.0
+radius = 50.0
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.9
@@ -28,6 +31,14 @@ height = 1.9
 
 [sub_resource type="LabelSettings" id="LabelSettings_n84x6"]
 font_size = 20
+
+[sub_resource type="GDScript" id="GDScript_vcdtb"]
+script/source = "extends Camera3D
+
+func _on_Player_update_transform(position : Vector3, rotation):
+	set_position(Vector3(position.x, position.y + 100, position.z))
+	set_rotation(Vector3(self.get_rotation().x, rotation, self.get_rotation().z))
+"
 
 [sub_resource type="Animation" id="Animation_1dcnt"]
 resource_name = "Reloading"
@@ -50,11 +61,14 @@ _data = {
 &"Reloading": SubResource("Animation_1dcnt")
 }
 
-[sub_resource type="CapsuleShape3D" id="6"]
-height = 1.9
-
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("3")
+
+[node name="EnemyTriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyTriggerArea"]
+shape = SubResource("CylinderShape3D_bb13o")
+debug_fill = false
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("1")
@@ -174,8 +188,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 200.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 220.0
 grow_horizontal = 0
 metadata/_edit_use_custom_anchors = false
 metadata/_edit_layout_mode = 1
@@ -189,7 +205,7 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 100, 0)
 projection = 1
 size = 25.0
-script = ExtResource("4")
+script = SubResource("GDScript_vcdtb")
 
 [node name="CenterContainer" type="CenterContainer" parent="Head/Camera/UI"]
 layout_mode = 0
@@ -267,38 +283,29 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="GunCamera" type="Camera3D" parent="Head/Camera/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.2)
 cull_mask = 2
 
 [node name="Hand" type="Node3D" parent="Head/Camera"]
 script = ExtResource("7_vcdtb")
 
-[node name="FirstWeapon2" parent="Head/Camera/Hand" instance=ExtResource("8_71jvt")]
+[node name="FirstWeapon" parent="Head/Camera/Hand" instance=ExtResource("8_71jvt")]
 transform = Transform3D(-0.0695865, 0, -0.495134, 0, 0.5, 0, 0.495134, 0, -0.0695865, 0.29, -0.2, -0.95)
 visible = false
 
 [node name="SecondWeapon" parent="Head/Camera/Hand" instance=ExtResource("9_o3wni")]
 transform = Transform3D(-0.0342445, -0.00280163, -0.0939121, 0.00139537, 0.0999293, -0.00348996, 0.0939434, -0.00250554, -0.0341813, 0.23, -0.18, -0.39)
 visible = false
+ads_rotation = Vector3(0, -90, -2)
 
-[node name="FirstWeapon" parent="Head/Camera/Hand" instance=ExtResource("11_hsj3n")]
+[node name="FirstWeapon1" parent="Head/Camera/Hand" instance=ExtResource("11_hsj3n")]
 transform = Transform3D(-0.0278347, 0, -0.198054, 0, 0.2, 0, 0.198054, 0, -0.0278347, 0.25, -0.25, -0.6)
-ads_position = Vector3(0.011, -0.23, -0.5)
+ads_position = Vector3(0.011, -0.225, -0.5)
+ads_rotation = Vector3(0, -90, -1)
 
 [node name="MeleeWeapon" parent="Head/Camera/Hand" instance=ExtResource("11_bb13o")]
 transform = Transform3D(0.0403587, -0.0224591, -0.0191511, -0.0241481, -0.00647048, -0.0433013, 0.0169718, 0.044201, -0.0160697, 0.15, -0.1, -0.25)
 visible = false
-
-[node name="Camera3D" type="Camera3D" parent="Head"]
-cull_mask = 2
-
-[node name="CollisionDetectionArea" type="Area3D" parent="."]
-
-[node name="CollisionShape" type="CollisionShape3D" parent="CollisionDetectionArea"]
-shape = SubResource("6")
-
-[node name="Interact Timer" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 max_distance = 20.0
@@ -308,5 +315,3 @@ max_distance = 20.0
 [connection signal="property_list_changed" from="." to="." method="_on_player_property_list_changed"]
 [connection signal="speed_changed" from="." to="Head/Camera/UI" method="_on_player_speed_changed"]
 [connection signal="weapon_changed" from="." to="Head/Camera/UI" method="_on_player_weapon_changed"]
-[connection signal="body_entered" from="CollisionDetectionArea" to="." method="_on_Area_body_entered"]
-[connection signal="timeout" from="Interact Timer" to="." method="_on_Interact_Timer_timeout"]

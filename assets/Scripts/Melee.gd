@@ -18,8 +18,8 @@ func _physics_process(delta):
 func _melee_attack():
 	can_swing = false
 
-	if audio:
-		audio.play()
+	if attack_audio:
+		attack_audio.play()
 
 	var start_pos: Vector3 = weapon_root.position
 	var start_rot: Vector3 = weapon_root.rotation_degrees

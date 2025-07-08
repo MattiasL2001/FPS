@@ -28,7 +28,6 @@ var all_weapons: Array[Weapon] = []
 var current_weapon_index: int = 0
 
 @onready var grenade_packed = preload("res://assets/Scenes/Grenade.tscn")
-@onready var grenade = grenade_packed.instantiate()
 
 @onready var walking : AudioStream = preload("res://assets/Sounds/walking.wav")
 @onready var running : AudioStream = preload("res://assets/Sounds/running.wav")
@@ -44,7 +43,10 @@ var current_weapon_index: int = 0
 @onready var interact_raycast : RayCast3D = $Head/Camera/RayCastInteraction
 @onready var raycast_shooting : RayCast3D = $Head/Camera/RayCastShooting
 @onready var fall_damage_threshold = 5
+@onready var enemy_trigger_area: Area3D = $EnemyTriggerArea
+@onready var minimap_camera: Camera3D = $Head/Camera/UI/ViewportContainer/Viewport/MinimapCamera
 
+var interact_timer: Timer
 var interact_target: Interactable = null
 
 signal speed_changed
@@ -53,6 +55,8 @@ signal update_transform
 signal health_changed
 signal ammo_changed
 signal weapon_changed
+signal enemy_entered(enemy: Enemy)
+signal enemy_exited(enemy: Enemy)
 
 var camera_x_rotation = 0
 
@@ -63,6 +67,16 @@ func _ready():
 	all_weapons = [first_weapon, second_weapon, melee_weapon]
 	current_weapon_index = 0
 	_activate_weapon(current_weapon_index)
+	
+	interact_timer = Timer.new()
+	interact_timer.wait_time = 0.2
+	interact_timer.one_shot = false
+	interact_timer.autostart = true
+	add_child(interact_timer)
+	interact_timer.timeout.connect(check_collision)
+	
+	enemy_trigger_area.body_entered.connect(_on_enemy_trigger_entered)
+	enemy_trigger_area.body_exited.connect(_on_enemy_trigger_exited)
 
 	raycast_shooting.set_target_position(Vector3(0, 0, -first_weapon.fire_range))
 	second_weapon.visible = false
@@ -92,9 +106,9 @@ func _input(event):
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			_weapon_switch(1)  # scroll ner
+			_weapon_switch(1)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			_weapon_switch(-1)  # scroll upp
+			_weapon_switch(-1)
 
 func _updater():
 	var hit = false
@@ -106,8 +120,11 @@ func _updater():
 
 func _process(delta):
 	gun_cam.global_transform = camera.global_transform
-	if Input.is_action_pressed("Grenade") and get_node("../Grenade") != null and grenade_ammo > 0:
-		get_node("../Grenade").set_position(Vector3(to_global(get_node("Head/Camera/Grenade_Pos").get_position())))
+	minimap_camera.set_position(Vector3(position.x, position.y + 100, position.z))
+	minimap_camera.set_rotation(Vector3(minimap_camera.rotation.x, rotation.y, rotation.z))
+
+	if Input.is_action_just_pressed("Grenade"):
+		throw_grenade()
 
 func _physics_process(delta):
 	var rotation = head.global_transform.basis.get_euler().y
@@ -154,8 +171,6 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("jump") and is_on_floor() and can_jump:
 		_jump()
-	if Input.is_action_just_pressed("Grenade"):
-		throw_grenade()
 
 	if Input.is_action_pressed("shift"):
 		speed = sprint_speed
@@ -191,7 +206,7 @@ func _jump():
 	await get_tree().create_timer(.5).timeout
 	can_jump = true
 
-func _weapon_switch(direction: int):
+func _weapon_switch(direction: int) -> void:
 	if not weapon_switch or all_weapons.size() < 2:
 		return
 	weapon_switch = false
@@ -200,7 +215,12 @@ func _weapon_switch(direction: int):
 		current_weapon.cancel_reload()
 	if current_weapon.has_method("set_aiming"):
 		current_weapon.set_aiming(false)
-		
+
+	await get_tree().create_timer(0.15).timeout
+	
+	if current_weapon.has_method("stop_all_sounds"):
+		current_weapon.stop_all_sounds()
+
 	current_weapon.deactivate()
 
 	current_weapon_index = (current_weapon_index + direction) % all_weapons.size()
@@ -213,7 +233,6 @@ func _weapon_switch(direction: int):
 	change_ammo_ui()
 	emit_signal("weapon_changed", current_weapon.weapon_type)
 
-	await get_tree().create_timer(0.3).timeout
 	weapon_switch = true
 
 func _activate_weapon(index: int):
@@ -261,10 +280,6 @@ func change_ammo_ui():
 	else:
 		emit_signal("ammo_changed", "∞", "∞")
 
-func _on_Area_body_entered(body):
-	if body != self:
-		pass
-
 func check_collision():
 	if interact_raycast.is_colliding():
 		var collider = interact_raycast.get_collider()
@@ -282,5 +297,12 @@ func check_collision():
 func _on_Timer_timeout():
 	emit_signal("timer_finished")
 
-func _on_Interact_Timer_timeout():
-	check_collision()
+func _on_enemy_trigger_entered(body: Node):
+	print("enemy entered")
+	if body is Enemy:
+		body.on_body_entered(self)
+
+func _on_enemy_trigger_exited(body: Node):
+	print("enemy enxited")
+	if body is Enemy:
+		body.on_body_exited(self)

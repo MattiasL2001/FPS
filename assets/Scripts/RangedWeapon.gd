@@ -21,6 +21,8 @@ class_name RangedWeapon
 @onready var reloading_ui = get_node("../../UI/Reloading")
 @onready var bullet_hole = preload("res://assets/Scenes/Bullet_Hole.tscn")
 
+@onready var clip_audio_played: bool = false
+
 signal ammo_changed
 
 var current_ammo: int = 0
@@ -66,7 +68,6 @@ func _ready():
 
 func _process(delta):
 	if is_active:
-		# Hantera position
 		var target_pos: Vector3
 		if is_aiming:
 			target_pos = ads_position
@@ -74,7 +75,6 @@ func _process(delta):
 			target_pos = _original_position
 		position = position.lerp(target_pos, delta * ads_speed)
 
-		# Hantera rotation
 		var target_rot: Vector3
 		if is_aiming:
 			target_rot = Vector3(
@@ -89,30 +89,48 @@ func _process(delta):
 		rotation.y = lerp_angle(rotation.y, target_rot.y, delta * ads_speed)
 		rotation.z = lerp_angle(rotation.z, target_rot.z, delta * ads_speed)
 
-		# Kamera-FOV för sikt
 		if camera and can_aim:
 			var target_fov = aim_fov if is_aiming else original_fov
 			camera.fov = lerp(camera.fov, target_fov, delta * ads_speed)
 
-		# Recoil recovery
 		sway_pivot.position = sway_pivot.position.lerp(Vector3.ZERO, delta * recoil_recovery_speed)
 
 func _physics_process(delta):
 	if not is_active:
 		return
 
-	if Input.is_action_pressed("mouseClick") and can_fire and not reloading:
-		if current_ammo > 0:
+	var mouse_pressed = Input.is_action_pressed("mouseClick")
+	var mouse_just_pressed = Input.is_action_just_pressed("mouseClick")
+	var reload_pressed = Input.is_action_just_pressed("reload")
+
+	if mouse_pressed and not reloading:
+		if current_ammo > 0 and can_fire:
 			_fire()
 			can_fire = false
 			fire_timer.wait_time = fire_rate
 			fire_timer.start()
-		elif ammo_total > 0:
-			_reloading()
-	elif Input.is_action_just_pressed("reload") and current_ammo < clip_size and ammo_total > 0:
-		_reloading()
+			clip_audio_played = false
+		elif current_ammo == 0:
+			if ammo_total > 0:
+				_reloading()
+				clip_audio_played = false
+			elif not clip_audio_played:
+				clip_audio.play()
+				clip_audio_played = true
+
+	elif reload_pressed:
+		if current_ammo < clip_size:
+			if ammo_total > 0:
+				_reloading()
+
+	elif mouse_just_pressed and ammo_total == 0 and current_ammo == 0:
+		clip_audio.play()
+
 	else:
 		camera.position = camera_position
+
+	if not mouse_pressed:
+		clip_audio_played = false
 
 func update_aim_state():
 	if not player:
@@ -127,8 +145,8 @@ func update_aim_state():
 		player.sniper_scope.visible = false
 
 func _fire():
-	if audio:
-		audio.play()
+	if attack_audio:
+		attack_audio.play()
 	if sway_pivot:
 		sway_pivot.translate_object_local(Vector3(0, 0, -recoil_strength))
 	if muzzle:
@@ -219,7 +237,6 @@ func check_collision():
 		var collider: CollisionObject3D = raycast.get_collider()
 		var shape_index: int = raycast.get_collider_shape()
 
-		# Hämta vilken shape-nod som träffats
 		var owner_id = collider.shape_find_owner(shape_index)
 		var hit_node = collider.shape_owner_get_owner(owner_id)
 
